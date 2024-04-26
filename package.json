@@ -1,0 +1,17 @@
+{
+  "name": "megatutor",
+  "version": "1.0.0",
+  "description": "The goal of this project is to create a web application that allows students or their parents to find and hire a personal tutor based on the tutor's location, availability, qualifications, and experience.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Zibran Zarif Amio",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
