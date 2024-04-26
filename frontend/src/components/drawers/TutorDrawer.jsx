@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { parentMenuItems } from "../../constants/parentMenuItems";
+import { tutorMenuItems } from "../../constants/tutorMenuItems";
 import { DrawerHeader, AppBar, Drawer } from "../../styles/drawerStyles";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -21,7 +21,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import { Link } from "react-router-dom";
 import { Avatar } from "@mui/material";
 
-const ParentDrawer = ({ children }) => {
+const TutorDrawer = ({ children }) => {
   const theme = useTheme();
   const [open, setOpen] = useState(true);
 
@@ -112,7 +112,7 @@ const ParentDrawer = ({ children }) => {
         )}
 
         <List>
-          {parentMenuItems.map((item, index) => (
+          {tutorMenuItems.map((item, index) => (
             <ListItem
               key={index}
               component={Link}
@@ -155,4 +155,4 @@ const ParentDrawer = ({ children }) => {
   );
 };
 
-export default ParentDrawer;
+export default TutorDrawer;

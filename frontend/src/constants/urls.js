@@ -10,6 +10,9 @@ export const urls = {
   TUTOR_RESULT: "tutor-result",
 
   // tutor directories
-  TUTOR: "tutor-dashboard",
+  TUTOR_DASHBOARD: "tutor-dashboard",
+  AVAILABLE_JOBS: "available-jobs",
+  MY_APPLICATIONS: "my-applications",
+
   PAYMENT: "payment",
 };
