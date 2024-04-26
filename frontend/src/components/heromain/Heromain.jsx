@@ -1,8 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Box, Typography, Button } from "@mui/material";
 import { btnStyles } from "../../styles/btnStyles";
+import { urls } from "../../constants/urls";
 
 function Heromain() {
+  const navigate = useNavigate();
   return (
     <Box display="flex" alignItems="center" justifyContent="center" mb={4}>
       <Box mr={2}>
@@ -21,7 +24,12 @@ function Heromain() {
             Tutor Today
           </Typography>
         </Box>
-        <Button sx={btnStyles} variant="contained" color="primary">
+        <Button
+          sx={btnStyles}
+          variant="contained"
+          color="primary"
+          onClick={() => navigate("/" + urls.LOGIN)}
+        >
           Hire a tutor
         </Button>
       </Box>
