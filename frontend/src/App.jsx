@@ -9,6 +9,7 @@ import ParentDrawer from "./components/drawers/ParentDrawer";
 import ParentDashboard from "./pages/parent-pages/ParentDashboard";
 import RequestTutor from "./pages/parent-pages/RequestTutor";
 import PostedJobs from "./pages/parent-pages/PostedJobs";
+import CurrentApplications from "./pages/parent-pages/CurrentApplications";
 import TutorResult from "./pages/parent-pages/TutorResult";
 
 import PrivateRoutesTutor from "./pages/landing-page/PrivateRoutesTutor";
@@ -33,6 +34,7 @@ function App() {
           <Route path={urls.PARENT_DASHBOARD} element={<ParentDrawer><ParentDashboard /></ParentDrawer>} />
           <Route path={urls.REQUEST_TUTOR} element={<ParentDrawer><RequestTutor /></ParentDrawer>} />
           <Route path={urls.POSTED_JOBS} element={<ParentDrawer><PostedJobs /></ParentDrawer>} />
+          <Route path={urls.CURRENT_APPLICATIONS} element={<ParentDrawer><CurrentApplications /></ParentDrawer>} />
           <Route path={urls.TUTOR_RESULT} element={<ParentDrawer><TutorResult /></ParentDrawer>} />
         </Route>
 

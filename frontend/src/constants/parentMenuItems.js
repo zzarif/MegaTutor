@@ -14,6 +14,10 @@ export const parentMenuItems = [
     text: "Posted Job",
   },
   {
+    to: urls.CURRENT_APPLICATIONS,
+    text: "Current Applications",
+  },
+  {
     to: urls.TUTOR_RESULT,
     text: "Tutor Result",
   },

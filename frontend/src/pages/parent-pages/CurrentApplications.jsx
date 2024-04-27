@@ -5,6 +5,7 @@ import {
   Typography,
   Container,
   styled,
+  Divider,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { btnStyles3 } from "../../styles/btnStyles3";
@@ -14,7 +15,7 @@ const GrayCard = styled(Card)({
   background: "#f0f0f0",
 });
 
-const AvailableJobs = () => {
+const CurrentApplications = () => {
   const [loading, setLoading] = useState(false);
   const requestTutor = () => {
     setLoading(true);
@@ -22,7 +23,6 @@ const AvailableJobs = () => {
       setLoading(false);
     }, 1500);
   };
-
   return (
     <Container maxWidth="sm">
       <Typography
@@ -32,12 +32,12 @@ const AvailableJobs = () => {
         align="center"
         gutterBottom
       >
-        Available Jobs
+        Current Applications
       </Typography>
       <GrayCard>
         <CardContent>
           <Typography variant="h6" component="h2">
-            Md. Sameen Mahmud
+            Job: Md. Sameen Mahmud
           </Typography>
           <Typography color="textSecondary" gutterBottom>
             Chattogram Collegiate School and College
@@ -51,6 +51,19 @@ const AvailableJobs = () => {
             3 days / per week
             <br />
             Salary: 7000 tk
+            <br />
+            <br />
+          </Typography>
+          <Divider />
+            <br />
+          <Typography variant="h6" component="h2">
+            Applicant: Md. Sakib Rahman
+          </Typography>
+          <Typography color="textSecondary" gutterBottom>
+            University of Dhaka (B.Sc. Hons)
+          </Typography>
+          <Typography variant="body2" component="p">
+            HSC Grade: 5.00, SSC Grade: 5.00
           </Typography>
         </CardContent>
         <LoadingButton
@@ -61,73 +74,11 @@ const AvailableJobs = () => {
           variant="contained"
           color="primary"
         >
-          Apply for Job
-        </LoadingButton>
-      </GrayCard>
-
-      <GrayCard>
-        <CardContent>
-          <Typography variant="h6" component="h2">
-            Onamika Choudhury
-          </Typography>
-          <Typography color="textSecondary" gutterBottom>
-            Holy Cross College
-          </Typography>
-          <Typography variant="body2" component="p">
-            Standard 9 (Bangla Medium)
-            <br />
-            Location: Dhanmondi, Dhaka
-            <br />
-            <br />
-            4 days / per week
-            <br />
-            Salary: 8000 tk
-          </Typography>
-        </CardContent>
-        <LoadingButton
-          // loading={loading}
-          loadingPosition="start"
-          sx={btnStyles3}
-          // onClick={requestTutor}
-          variant="contained"
-          color="primary"
-        >
-          Apply for Job
-        </LoadingButton>
-      </GrayCard>
-
-      <GrayCard>
-        <CardContent>
-          <Typography variant="h6" component="h2">
-            Anower Khan
-          </Typography>
-          <Typography color="textSecondary" gutterBottom>
-            Dhaka College
-          </Typography>
-          <Typography variant="body2" component="p">
-            Standard 11 (Bangla Medium)
-            <br />
-            Location: Lalmatia, Dhaka
-            <br />
-            <br />
-            3 days / per week
-            <br />
-            Salary: 7500 tk
-          </Typography>
-        </CardContent>
-        <LoadingButton
-          // loading={loading}
-          loadingPosition="start"
-          sx={btnStyles3}
-          // onClick={requestTutor}
-          variant="contained"
-          color="primary"
-        >
-          Apply for Job
+          Confirm Tutor
         </LoadingButton>
       </GrayCard>
     </Container>
   );
 };
 
-export default AvailableJobs;
+export default CurrentApplications;
