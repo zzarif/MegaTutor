@@ -20,6 +20,8 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { Link } from "react-router-dom";
 import { Avatar } from "@mui/material";
+import { School } from "@mui/icons-material";
+import AccountMenu from "../account-menu/AccountMenu";
 
 const ParentDrawer = ({ children }) => {
   const theme = useTheme();
@@ -57,14 +59,18 @@ const ParentDrawer = ({ children }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            fontFamily={"Poppins"}
-          >
-            MegaTutor
-          </Typography>
+          <Box display="flex" width={"100%"} alignItems="center" justifyContent="space-between">
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              fontFamily={"Poppins"}
+            >
+              <School sx={{ mb: -0.4, mr: 0.1 }} />
+              MegaTutor
+            </Typography>
+            <AccountMenu />
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer

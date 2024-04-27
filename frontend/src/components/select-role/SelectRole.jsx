@@ -6,12 +6,14 @@ import RadioGroup from "@mui/joy/RadioGroup";
 import Sheet from "@mui/joy/Sheet";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 
-export default function SelectRole() {
+export default function SelectRole({ role, setRole }) {
   const roles = ["Parent or Student", "Tutor"];
   return (
     <RadioGroup
       aria-label="platform"
-      defaultValue={roles[0]}
+      defaultValue={role}
+      value={role}
+      onChange={(e) => setRole(e.target.value)}
       overlay
       name="platform"
       sx={{

@@ -15,12 +15,15 @@ import SelectRole from "../../components/select-role/SelectRole";
 import { btnStyles2 } from "../../styles/btnStyles2";
 
 function SignupPage() {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [role, setRole] = useState("Parent or Student");
 
   const signup = () => {
     setLoading(true);
     setTimeout(() => {
+      if(role === "Parent or Student") navigate("/"+urls.PARENT_DASHBOARD);
+      else navigate("/"+urls.TUTOR_DASHBOARD);
       setLoading(false);
     }, 1500);
   };

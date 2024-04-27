@@ -3,11 +3,6 @@ import {
   Container,
   Typography,
   TextField,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  Grid,
-  Link,
   Box,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -18,12 +13,15 @@ import SelectRole from "../../components/select-role/SelectRole";
 import { btnStyles2 } from "../../styles/btnStyles2";
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [role, setRole] = useState("Parent or Student");
 
   const signin = () => {
     setLoading(true);
     setTimeout(() => {
+      if(role === "Parent or Student") navigate("/"+urls.PARENT_DASHBOARD);
+      else navigate("/"+urls.TUTOR_DASHBOARD);
       setLoading(false);
     }, 1500);
   };
