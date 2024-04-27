@@ -1,20 +1,16 @@
-// Import required modules
-const express = require('express');
+const express = require("express");
 require("dotenv").config();
-
-
-// Create an Express application
+const cors = require("cors");
 const app = express();
 
-// Define a route handler for the root path
-app.get('/', (req, res) => {
-  res.send('Hello, World! This is your Node.js server speaking.');
-});
+app.use(express.static("dist"));
 
-// Define the port to listen on
-const PORT = process.env.PORT || 3000; // Default to port 3000 if no PORT environment variable is set
+app.get("*", (req,res) => {
+    res.sendFile(__dirname+"/dist/index.html");
+})
 
-// Start the server and listen on the specified port
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.listen(process.env.PORT);
