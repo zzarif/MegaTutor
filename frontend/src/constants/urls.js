@@ -6,7 +6,7 @@ export const urls = {
   // parents directories
   PARENT_DASHBOARD: "parent-dashboard",
   REQUEST_TUTOR: "request-tutor",
-  JOB_UPLOAD: "job-upload",
+  POSTED_JOBS: "posted-jobs",
   TUTOR_RESULT: "tutor-result",
 
   // tutor directories

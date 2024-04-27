@@ -10,7 +10,7 @@ export const parentMenuItems = [
     text: "Request Tutor",
   },
   {
-    to: urls.JOB_UPLOAD,
+    to: urls.POSTED_JOBS,
     text: "Posted Job",
   },
   {

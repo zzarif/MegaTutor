@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Card,
   CardContent,
@@ -6,22 +6,12 @@ import {
   Container,
   styled,
 } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
-import { btnStyles3 } from "../../styles/btnStyles3";
 
 const GrayCard = styled(Card)({
   background: "#f0f0f0",
 });
 
-const AvailableJobs = () => {
-  const [loading, setLoading] = useState(false);
-  const requestTutor = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-  };
-
+const PostedJobs = () => {
   return (
     <Container maxWidth="sm">
       <Typography
@@ -31,7 +21,7 @@ const AvailableJobs = () => {
         align="center"
         gutterBottom
       >
-        Available Jobs
+        Posted Jobs
       </Typography>
       <GrayCard>
         <CardContent>
@@ -52,19 +42,9 @@ const AvailableJobs = () => {
             Salary: 7000 tk
           </Typography>
         </CardContent>
-        <LoadingButton
-          loading={loading}
-          loadingPosition="start"
-          sx={btnStyles3}
-          onClick={requestTutor}
-          variant="contained"
-          color="primary"
-        >
-          Apply for Job
-        </LoadingButton>
       </GrayCard>
     </Container>
   );
 };
 
-export default AvailableJobs;
+export default PostedJobs;

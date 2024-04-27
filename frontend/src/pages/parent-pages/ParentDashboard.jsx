@@ -14,13 +14,6 @@ const GrayCard = styled(Card)({
 });
 
 const ParentDashboard = () => {
-  const [loading, setLoading] = useState(false);
-  const requestTutor = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-  };
 
   return (
     <Container maxWidth="sm">
