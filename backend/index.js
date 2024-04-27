@@ -3,10 +3,8 @@ require("dotenv").config();
 const cors = require("cors");
 const app = express();
 
-app.use(express.static("dist"));
-
-app.get("*", (req, res) => {
-  res.sendFile(__dirname + "/dist/index.html");
+app.get("/", (req, res) => {
+  res.send("Hello wlorde");
 });
 
 app.use(cors());
