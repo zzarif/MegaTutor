@@ -30,12 +30,7 @@ function LoginPage() {
   const signin = async () => {
     setLoading(true);
     try {
-      const endpoint = role === "Parent or Student"
-      ? "loginParent"
-      : "loginTutor";
-      const url = new URL(
-        import.meta.env.VITE_API_BASE_URL + endpoint
-      );
+      const url = new URL(import.meta.env.VITE_API_BASE_URL + "login");
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -48,7 +43,7 @@ function LoginPage() {
         const data = await response.json();
         console.log("User logged in successfully", data.user);
         // Handle success, e.g., redirect to a success page or update the UI
-        if (role === "Parent or Student") {
+        if (data.role === "Parent or Student") {
           localStorage.setItem("auth-parent", data.user);
           navigate("/" + urls.PARENT_DASHBOARD);
         } else {

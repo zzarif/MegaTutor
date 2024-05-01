@@ -47,17 +47,13 @@ function SignupPage() {
   const register = async () => {
     setLoading(true);
     try {
-      const url = new URL(
-        import.meta.env.VITE_API_BASE_URL + role === "Parent or Student"
-          ? "registerParent"
-          : "registerTutor"
-      );
+      const url = new URL(import.meta.env.VITE_API_BASE_URL + "register");
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, phone, email, password }),
+        body: JSON.stringify({ name, phone, email, password, role }),
       });
 
       if (response.ok) {
