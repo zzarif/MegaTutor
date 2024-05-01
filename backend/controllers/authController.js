@@ -40,7 +40,7 @@ const register = async (req, res) => {
       // const hashedPassword = await bcrypt.hash(password, saltRounds);
 
       // Create a Firestore document for the user
-      await setDoc(doc(db, process.env.PARENTS_COLLECTION, user.uid), {
+      await setDoc(doc(db, process.env.USERS_COLLECTION, user.uid), {
         name: name,
         phone: phone,
         email: email,
@@ -73,7 +73,7 @@ const login = async (req, res) => {
     // You don't need to manually compare the passwords.
 
     const docSnap = await getDoc(
-      doc(db, process.env.PARENTS_COLLECTION, user.uid)
+      doc(db, process.env.USERS_COLLECTION, user.uid)
     );
 
     const { role } = docSnap.data();
