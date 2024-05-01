@@ -3,12 +3,15 @@ require("dotenv").config();
 const cors = require("cors");
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Hello wlorde");
-});
-
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.listen(process.env.PORT);
+app.use(require("./routers/authRouterParent"));
+app.use(require("./routers/authRouterTutor"));
+
+// Start the server
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
