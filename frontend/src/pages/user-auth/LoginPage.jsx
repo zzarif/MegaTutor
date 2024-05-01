@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  Container,
-  Typography,
-  TextField,
-  Box,
-} from "@mui/material";
+import { Container, Typography, TextField, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { urls } from "../../constants/urls";
 import { LoadingButton } from "@mui/lab";
@@ -17,13 +12,62 @@ function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [role, setRole] = useState("Parent or Student");
 
-  const signin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const validation = () => {
+    if (
+      !String(email)
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+    )
+      alert("Invalid email format.");
+    else signin();
+  };
+
+  const signin = async () => {
     setLoading(true);
-    setTimeout(() => {
-      if(role === "Parent or Student") navigate("/"+urls.PARENT_DASHBOARD);
-      else navigate("/"+urls.TUTOR_DASHBOARD);
+    try {
+      const endpoint = role === "Parent or Student"
+      ? "loginParent"
+      : "loginTutor";
+      const url = new URL(
+        import.meta.env.VITE_API_BASE_URL + endpoint
+      );
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("User logged in successfully", data.user);
+        // Handle success, e.g., redirect to a success page or update the UI
+        if (role === "Parent or Student") {
+          localStorage.setItem("auth-parent", data.user);
+          navigate("/" + urls.PARENT_DASHBOARD);
+        } else {
+          localStorage.setItem("auth-tutor", data.user);
+          navigate("/" + urls.TUTOR_DASHBOARD);
+        }
+      } else {
+        const errorData = await response.json();
+        console.error("Error logging in user:", errorData.error);
+        // Handle error, e.g., display an error message to the user
+        alert("Error logging in user");
+      }
+    } catch (error) {
+      console.error("Error logging in user:", error);
+      // Handle network or other errors
+      alert("Error logging in user");
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -40,29 +84,35 @@ function LoginPage() {
           Choose Yourself to Sign In
         </Typography>
         <SelectRole role={role} setRole={setRole} />
-        <form>
-          <TextField label="Email" fullWidth margin="normal" />
-          <TextField
-            label="Password"
-            type="password"
-            fullWidth
-            margin="normal"
-          />
-          <Typography mt={2} mb={2} fontFamily={"Poppins"}>
-            Forgot Password?
-          </Typography>
-          
+        <TextField
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          label="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          fullWidth
+          margin="normal"
+        />
+        <Typography mt={2} mb={2} fontFamily={"Poppins"}>
+          Forgot Password?
+        </Typography>
+
         <LoadingButton
           loading={loading}
           loadingPosition="start"
           sx={btnStyles2}
-          onClick={signin}
+          onClick={validation}
           variant="contained"
           color="primary"
         >
           Sign In
         </LoadingButton>
-        </form>
       </Container>
     </Box>
   );

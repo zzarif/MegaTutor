@@ -27,7 +27,9 @@ export default function AccountMenu() {
 
   const logout = () => {
     setAnchorEl(null);
-    navigate("/"+urls.LOGIN);
+    localStorage.removeItem("auth-parent");
+    localStorage.removeItem("auth-tutor");
+    navigate("/" + urls.LOGIN);
   };
 
   return (

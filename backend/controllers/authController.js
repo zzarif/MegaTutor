@@ -4,13 +4,13 @@ const {
   signInWithEmailAndPassword,
   updateProfile,
 } = require("firebase/auth");
-const { doc, setDoc } = require("firebase/firestore");
+const { doc, setDoc, getDoc } = require("firebase/firestore");
 const { auth, db } = require("../config/firebase");
 // const bcrypt = require('bcrypt');
 
 // Register parent
-const registerParent = async (req, res) => {
-  const { name, phone, email, password } = req.body;
+const register = async (req, res) => {
+  const { name, phone, email, password, role } = req.body;
 
   try {
     // Check if the user already exists
@@ -44,6 +44,7 @@ const registerParent = async (req, res) => {
         name: name,
         phone: phone,
         email: email,
+        role: role,
         // password: hashedPassword // use it to store bcrypt password
       });
 
@@ -56,7 +57,7 @@ const registerParent = async (req, res) => {
 };
 
 // Login parent
-const loginParent = async (req, res) => {
+const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -71,11 +72,19 @@ const loginParent = async (req, res) => {
     // Firebase automatically compares the provided password with the stored hashed password.
     // You don't need to manually compare the passwords.
 
-    res.status(200).json({ message: "User logged in successfully", user });
+    const docSnap = await getDoc(
+      doc(db, process.env.PARENTS_COLLECTION, user.uid)
+    );
+
+    const { role } = docSnap.data();
+
+    res
+      .status(200)
+      .json({ message: "User logged in successfully", user, role });
   } catch (error) {
     console.error("Error logging in user:", error);
     res.status(401).json({ error: "Invalid email or password" });
   }
 };
 
-module.exports = { registerParent, loginParent };
+module.exports = { register, login };
