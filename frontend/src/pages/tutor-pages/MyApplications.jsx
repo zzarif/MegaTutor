@@ -7,8 +7,9 @@ import {
   styled,
 } from "@mui/material";
 
-const GrayCard = styled(Card)({
-  background: "#f0f0f0",
+const CustomCard = styled(Card)({
+  marginBottom: 20,
+  background: "white",
 });
 
 const MyApplications = () => {
@@ -23,7 +24,7 @@ const MyApplications = () => {
       >
         My Applications
       </Typography>
-      <GrayCard>
+      <CustomCard>
         <CardContent>
           <Typography variant="h6" component="h2">
             Md. Sameen Mahmud
@@ -42,7 +43,7 @@ const MyApplications = () => {
             Salary: 7000 tk
           </Typography>
         </CardContent>
-      </GrayCard>
+      </CustomCard>
     </Container>
   );
 };

@@ -36,7 +36,7 @@ const TutorDrawer = ({ children }) => {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", bgcolor: "#ececec" }}>
       <CssBaseline />
       <AppBar
         position="fixed"

@@ -7,13 +7,14 @@ export const urls = {
   PARENT_DASHBOARD: "parent-dashboard",
   REQUEST_TUTOR: "request-tutor",
   POSTED_JOBS: "posted-jobs",
-  CURRENT_APPLICATIONS: "current-applications",
-  TUTOR_RESULT: "tutor-result",
+  APPLIED_TUTORS: "applied-tutors",
+  CONFIRMED_TUTORS: "confirmed-tutors",
 
   // tutor directories
   TUTOR_DASHBOARD: "tutor-dashboard",
   AVAILABLE_JOBS: "available-jobs",
   MY_APPLICATIONS: "my-applications",
+  MY_JOBS: "my-jobs",
 
   PAYMENT: "payment",
 };

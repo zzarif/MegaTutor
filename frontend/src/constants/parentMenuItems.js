@@ -14,11 +14,11 @@ export const parentMenuItems = [
     text: "Posted Job",
   },
   {
-    to: urls.CURRENT_APPLICATIONS,
-    text: "Current Applications",
+    to: urls.APPLIED_TUTORS,
+    text: "Applied Tutors",
   },
   {
-    to: urls.TUTOR_RESULT,
-    text: "Tutor Result",
+    to: urls.CONFIRMED_TUTORS,
+    text: "Confirmed Tutors",
   },
 ];

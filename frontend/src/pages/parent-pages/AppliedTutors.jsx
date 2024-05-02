@@ -1,18 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
   Typography,
   Container,
   styled,
+  Divider,
 } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { btnStyles3 } from "../../styles/btnStyles3";
 
 const CustomCard = styled(Card)({
   marginBottom: 20,
   background: "white",
 });
 
-const PostedJobs = () => {
+const AppliedTutors = () => {
+  const [loading, setLoading] = useState(false);
+  const requestTutor = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  };
   return (
     <Container maxWidth="sm">
       <Typography
@@ -22,12 +32,12 @@ const PostedJobs = () => {
         align="center"
         gutterBottom
       >
-        Posted Jobs
+        Applied Tutors
       </Typography>
       <CustomCard>
         <CardContent>
           <Typography variant="h6" component="h2">
-            Md. Sameen Mahmud
+            Job: Md. Sameen Mahmud
           </Typography>
           <Typography color="textSecondary" gutterBottom>
             Chattogram Collegiate School and College
@@ -41,55 +51,34 @@ const PostedJobs = () => {
             3 days / per week
             <br />
             Salary: 7000 tk
+            <br />
+            <br />
           </Typography>
-        </CardContent>
-      </CustomCard>
-      
-
-      <CustomCard>
-        <CardContent>
+          <Divider />
+          <br />
           <Typography variant="h6" component="h2">
-            Onamika Choudhury
+            Applicant: Md. Sakib Rahman
           </Typography>
           <Typography color="textSecondary" gutterBottom>
-            Holy Cross College
+            University of Dhaka (B.Sc. Hons)
           </Typography>
           <Typography variant="body2" component="p">
-            Standard 9 (Bangla Medium)
-            <br />
-            Location: Dhanmondi, Dhaka
-            <br />
-            <br />
-            4 days / per week
-            <br />
-            Salary: 8000 tk
+            HSC Grade: 5.00, SSC Grade: 5.00
           </Typography>
         </CardContent>
+        <LoadingButton
+          loading={loading}
+          loadingPosition="start"
+          sx={btnStyles3}
+          onClick={requestTutor}
+          variant="contained"
+          color="primary"
+        >
+          Confirm Tutor
+        </LoadingButton>
       </CustomCard>
-
-      <CustomCard>
-        <CardContent>
-          <Typography variant="h6" component="h2">
-            Anower Khan
-          </Typography>
-          <Typography color="textSecondary" gutterBottom>
-            Dhaka College
-          </Typography>
-          <Typography variant="body2" component="p">
-            Standard 11 (Bangla Medium)
-            <br />
-            Location: Lalmatia, Dhaka
-            <br />
-            <br />
-            3 days / per week
-            <br />
-            Salary: 7500 tk
-          </Typography>
-        </CardContent>
-      </CustomCard>
-
     </Container>
   );
 };
 
-export default PostedJobs;
+export default AppliedTutors;

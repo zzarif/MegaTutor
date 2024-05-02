@@ -9,9 +9,9 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { btnStyles3 } from "../../styles/btnStyles3";
 
-const GrayCard = styled(Card)({
+const CustomCard = styled(Card)({
   marginBottom: 20,
-  background: "#f0f0f0",
+  background: "white",
 });
 
 const AvailableJobs = () => {
@@ -34,7 +34,7 @@ const AvailableJobs = () => {
       >
         Available Jobs
       </Typography>
-      <GrayCard>
+      <CustomCard>
         <CardContent>
           <Typography variant="h6" component="h2">
             Md. Sameen Mahmud
@@ -63,9 +63,9 @@ const AvailableJobs = () => {
         >
           Apply for Job
         </LoadingButton>
-      </GrayCard>
+      </CustomCard>
 
-      <GrayCard>
+      <CustomCard>
         <CardContent>
           <Typography variant="h6" component="h2">
             Onamika Choudhury
@@ -94,9 +94,9 @@ const AvailableJobs = () => {
         >
           Apply for Job
         </LoadingButton>
-      </GrayCard>
+      </CustomCard>
 
-      <GrayCard>
+      <CustomCard>
         <CardContent>
           <Typography variant="h6" component="h2">
             Anower Khan
@@ -125,7 +125,7 @@ const AvailableJobs = () => {
         >
           Apply for Job
         </LoadingButton>
-      </GrayCard>
+      </CustomCard>
     </Container>
   );
 };

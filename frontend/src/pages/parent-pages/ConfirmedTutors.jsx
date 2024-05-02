@@ -10,12 +10,12 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { btnStyles3 } from "../../styles/btnStyles3";
 
-const GrayCard = styled(Card)({
+const CustomCard = styled(Card)({
   marginBottom: 20,
-  background: "#f0f0f0",
+  background: "white",
 });
 
-const CurrentApplications = () => {
+const ConfirmedTutors = () => {
   const [loading, setLoading] = useState(false);
   const requestTutor = () => {
     setLoading(true);
@@ -32,9 +32,9 @@ const CurrentApplications = () => {
         align="center"
         gutterBottom
       >
-        Current Applications
+        Confirmed Tutors
       </Typography>
-      <GrayCard>
+      <CustomCard>
         <CardContent>
           <Typography variant="h6" component="h2">
             Job: Md. Sameen Mahmud
@@ -55,7 +55,7 @@ const CurrentApplications = () => {
             <br />
           </Typography>
           <Divider />
-            <br />
+          <br />
           <Typography variant="h6" component="h2">
             Applicant: Md. Sakib Rahman
           </Typography>
@@ -76,9 +76,9 @@ const CurrentApplications = () => {
         >
           Confirm Tutor
         </LoadingButton>
-      </GrayCard>
+      </CustomCard>
     </Container>
   );
 };
 
-export default CurrentApplications;
+export default ConfirmedTutors;

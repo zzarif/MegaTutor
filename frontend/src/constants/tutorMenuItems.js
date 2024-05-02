@@ -12,5 +12,9 @@ export const tutorMenuItems = [
   {
     to: urls.MY_APPLICATIONS,
     text: "My Applications",
-  }
+  },
+  {
+    to: urls.MY_JOBS,
+    text: "My Jobs",
+  },
 ];
