@@ -8,6 +8,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(require("./routers/authRouter"));
+app.use(require("./routers/parentRouter"));
+app.use(require("./routers/tutorRouter"));
 
 // Start the server
 const port = process.env.PORT || 3000;
