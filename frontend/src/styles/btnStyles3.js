@@ -3,6 +3,7 @@ export const btnStyles3 = {
   m: 2,
   width: "95%",
   color: "white",
+  borderRadius: 4,
   fontFamily: "Poppins",
   textTransform: "none",
   backgroundColor: "#6200EE",

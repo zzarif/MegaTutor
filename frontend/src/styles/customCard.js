@@ -1,10 +1,10 @@
 import { Card, styled } from "@mui/material";
 
 const CustomCard = styled(Card)({
-  marginBottom: 20,
+  marginBottom: 30,
   borderRadius: 14,
   boxShadow: "5px 8px #acacac",
-  background: "white",
+  backgroundColor: "white",
 });
 
 export default CustomCard;

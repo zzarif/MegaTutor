@@ -18,7 +18,11 @@ const getAvailableJobs = async (req, res) => {
         where("status", "==", "pending")
       )
     );
-    res.status(200).json(snapshot.docs.map((doc) => doc.data()));
+    const availableJobs = [];
+    snapshot.docs.forEach((doc) =>
+      availableJobs.push({ jobId: doc.id, ...doc.data() })
+    );
+    res.status(200).json(availableJobs);
   } catch (error) {
     console.error("Error fetching jobs:", error);
     res.status(500).json({ error: "Failed to fetch jobs." });
