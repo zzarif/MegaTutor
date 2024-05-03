@@ -1,16 +1,24 @@
-const { FieldValue } = require("firebase/firestore");
+const {
+  addDoc,
+  collection,
+  serverTimestamp,
+  getDocs,
+  where,
+  query,
+  updateDoc,
+  doc,
+} = require("firebase/firestore");
 const { db } = require("../config/firebase");
 
 const getAvailableJobs = async (req, res) => {
   try {
-    res
-      .status(200)
-      .json(
-        db
-          .collection(process.env.JOBS_COLLECTION)
-          .where("status", "==", "pending")
-          .get()
-      );
+    const snapshot = await getDocs(
+      query(
+        collection(db, process.env.JOBS_COLLECTION),
+        where("status", "==", "pending")
+      )
+    );
+    res.status(200).json(snapshot.docs.map((doc) => doc.data()));
   } catch (error) {
     console.error("Error fetching jobs:", error);
     res.status(500).json({ error: "Failed to fetch jobs." });
@@ -20,21 +28,21 @@ const getAvailableJobs = async (req, res) => {
 const applyForJob = async (req, res) => {
   const { jobId, tutorId } = req.body;
   try {
-    res.status(200).json(
-      db
-        .collection(process.env.APPLICATIONS_COLLECTION)
-        .add({
-          jobId: jobId,
-          tutorId: tutorId,
-          status: "applied",
-          createdAt: FieldValue.serverTimestamp(),
-        })
-        .then(() => {
-          return db.collection(process.env.JOBS_COLLECTION).doc(jobId).update({
-            status: "applied",
-          });
-        })
-    );
+    console.log("Application sent");
+    await addDoc(collection(db, process.env.APPLICATIONS_COLLECTION), {
+      jobId: jobId,
+      tutorId: tutorId,
+      status: "applied",
+      createdAt: serverTimestamp(),
+    }).then(async () => {
+      console.log("Application received");
+      await updateDoc(doc(db, process.env.JOBS_COLLECTION, jobId), {
+        status: "applied",
+      });
+      console.log("Job status updated");
+    });
+    console.log("Application success");
+    res.status(200).json({ message: "Job application received." });
   } catch (error) {
     console.error("Error applying for job:", error);
     res.status(500).json({ error: "Failed to apply for job." });
@@ -42,17 +50,16 @@ const applyForJob = async (req, res) => {
 };
 
 const getCurrentApplications = async (req, res) => {
-  const { tutorId } = req.body;
+  const { tutorId } = req.query;
   try {
-    res
-      .status(200)
-      .json(
-        db
-          .collection(process.env.APPLICATIONS_COLLECTION)
-          .where("tutorId", "==", tutorId)
-          .where("status", "==", "applied")
-          .get()
-      );
+    const snapshot = await getDocs(
+      query(
+        collection(db, process.env.APPLICATIONS_COLLECTION),
+        where("tutorId", "==", tutorId),
+        where("status", "==", "applied")
+      )
+    );
+    res.status(200).json(snapshot.docs.map((doc) => doc.data()));
   } catch (error) {
     console.error("Error fetching current applications:", error);
     res.status(500).json({ error: "Failed to current applications." });
@@ -60,17 +67,16 @@ const getCurrentApplications = async (req, res) => {
 };
 
 const getMyJobs = async (req, res) => {
-  const { tutorId } = req.body;
+  const { tutorId } = req.query;
   try {
-    res
-      .status(200)
-      .json(
-        db
-          .collection(process.env.APPLICATIONS_COLLECTION)
-          .where("tutorId", "==", tutorId)
-          .where("status", "==", "confirmed")
-          .get()
-      );
+    const snapshot = await getDocs(
+      query(
+        collection(db, process.env.APPLICATIONS_COLLECTION),
+        where("tutorId", "==", tutorId),
+        where("status", "==", "confirmed")
+      )
+    );
+    res.status(200).json(snapshot.docs.map((doc) => doc.data()));
   } catch (error) {
     console.error("Error fetching my jobs:", error);
     res.status(500).json({ error: "Failed to fetch my jobs." });
