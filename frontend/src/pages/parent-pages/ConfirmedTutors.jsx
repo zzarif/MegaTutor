@@ -1,28 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  Card,
   CardContent,
   Typography,
   Container,
-  styled,
+  Box,
+  Avatar,
   Divider,
 } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
-import { btnStyles3 } from "../../styles/btnStyles3";
-
-const CustomCard = styled(Card)({
-  marginBottom: 20,
-  background: "white",
-});
+import CustomCard from "../../styles/customCard";
+import {
+  EventNoteRounded,
+  LocationOnRounded,
+  School,
+} from "@mui/icons-material";
+import FacebookCircularProgress from "../../components/fbspinner/FacebookCircularProgress";
+import { centered } from "../../styles/centered";
 
 const ConfirmedTutors = () => {
+  const [jobList, setJobList] = useState([]);
+
   const [loading, setLoading] = useState(false);
-  const requestTutor = () => {
+  const fetchConfirmedTutors = async () => {
     setLoading(true);
-    setTimeout(() => {
+    const parentId = JSON.parse(localStorage.getItem("auth-parent")).uid;
+    try {
+      const url = new URL(
+        import.meta.env.VITE_API_BASE_URL + "getConfirmedTutors"
+      );
+      url.searchParams.append("parentId", parentId);
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setJobList(data);
+      } else {
+        const errorData = await response.json();
+        alert(errorData.error);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert(error);
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   };
+
+  useEffect(() => {
+    fetchConfirmedTutors();
+  }, []);
+
   return (
     <Container maxWidth="sm">
       <Typography
@@ -32,51 +62,95 @@ const ConfirmedTutors = () => {
         align="center"
         gutterBottom
       >
-        Confirmed Tutors
+        <b>Confirmed Tutors</b>
       </Typography>
-      <CustomCard>
-        <CardContent>
-          <Typography variant="h6" component="h2">
-            Job: Md. Sameen Mahmud
+      {loading ? (
+        <Box sx={centered}>
+          <FacebookCircularProgress />
+        </Box>
+      ) : jobList.length === 0 ? (
+        <Box sx={centered}>
+          <EventNoteRounded sx={{ color: "gray" }} />
+          <Typography variant="body2" component="p" fontFamily="Poppins">
+            Nothing to show
           </Typography>
-          <Typography color="textSecondary" gutterBottom>
-            Chattogram Collegiate School and College
-          </Typography>
-          <Typography variant="body2" component="p">
-            Standard 10 (Bangla Medium)
-            <br />
-            Location: Mirpur 10, Dhaka
-            <br />
-            <br />
-            3 days / per week
-            <br />
-            Salary: 7000 tk
-            <br />
-            <br />
-          </Typography>
-          <Divider />
-          <br />
-          <Typography variant="h6" component="h2">
-            Applicant: Md. Sakib Rahman
-          </Typography>
-          <Typography color="textSecondary" gutterBottom>
-            University of Dhaka (B.Sc. Hons)
-          </Typography>
-          <Typography variant="body2" component="p">
-            HSC Grade: 5.00, SSC Grade: 5.00
-          </Typography>
-        </CardContent>
-        <LoadingButton
-          loading={loading}
-          loadingPosition="start"
-          sx={btnStyles3}
-          onClick={requestTutor}
-          variant="contained"
-          color="primary"
-        >
-          Confirm Tutor
-        </LoadingButton>
-      </CustomCard>
+        </Box>
+      ) : (
+        jobList.map((item, idx) => (
+          <Box key={idx}>
+            <CustomCard>
+              <CardContent>
+                <Box m={1.5} display="flex" justifyContent="space-between">
+                  <Box display="flex" alignItems="center" gap={1}>
+                    <Avatar />
+                    <Box>
+                      <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        fontFamily={"Poppins"}
+                      >
+                        <b>{item.studentName}</b>
+                      </Typography>
+                      <Typography mt={-0.5} color="textSecondary">
+                        {item.institute}
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Typography variant="h4" component="p" fontFamily={"Poppins"}>
+                    ৳<b>{item.salary}</b>
+                  </Typography>
+                </Box>
+
+                <Divider />
+                <Box m={2} display="flex" alignItems="center" gap={1}>
+                  <School sx={{ color: "gray" }} />
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    fontFamily={"Poppins"}
+                  >
+                    <b>{item.subjects}</b> - Standard {item.level} (
+                    {item.medium} Medium)
+                  </Typography>
+                </Box>
+
+                <Box m={2} display="flex" alignItems="center" gap={1}>
+                  <LocationOnRounded sx={{ color: "gray" }} />
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    fontFamily={"Poppins"}
+                  >
+                    <b>{item.location}</b> ({item.daysPerWeek})
+                  </Typography>
+                </Box>
+                <Divider />
+                <Box mt={2} ml={2} display="flex" gap={1}>
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    color="textSecondary"
+                    fontFamily={"Poppins"}
+                  >
+                    {Date(item.createdAt)}
+                  </Typography>
+                </Box>
+                <Box ml={2} display="flex" gap={1}>
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    color="textSecondary"
+                    fontFamily={"Poppins"}
+                  >
+                    Note: {item.details}
+                  </Typography>
+                </Box>
+              </CardContent>
+            </CustomCard>
+          </Box>
+        ))
+      )}
     </Container>
   );
 };

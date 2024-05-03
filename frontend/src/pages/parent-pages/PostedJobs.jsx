@@ -8,7 +8,11 @@ import {
   Divider,
 } from "@mui/material";
 import CustomCard from "../../styles/customCard";
-import { LocationOnRounded, School } from "@mui/icons-material";
+import {
+  EventNoteRounded,
+  LocationOnRounded,
+  School,
+} from "@mui/icons-material";
 import FacebookCircularProgress from "../../components/fbspinner/FacebookCircularProgress";
 import { centered } from "../../styles/centered";
 
@@ -61,6 +65,13 @@ const PostedJobs = () => {
       {loading ? (
         <Box sx={centered}>
           <FacebookCircularProgress />
+        </Box>
+      ) : jobList.length === 0 ? (
+        <Box sx={centered}>
+          <EventNoteRounded sx={{ color: "gray" }} />
+          <Typography variant="body2" component="p" fontFamily="Poppins">
+            Nothing to show
+          </Typography>
         </Box>
       ) : (
         jobList.map((item, idx) => (
