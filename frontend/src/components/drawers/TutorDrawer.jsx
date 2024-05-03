@@ -117,7 +117,7 @@ const TutorDrawer = ({ children }) => {
             />
 
             <Typography fontFamily={"Poppins"} fontSize={20}>
-              John Doe
+              {JSON.parse(localStorage.getItem("auth-tutor")).displayName}
             </Typography>
           </Box>
         )}

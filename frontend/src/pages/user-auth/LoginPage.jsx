@@ -44,10 +44,10 @@ function LoginPage() {
         console.log("User logged in successfully", data.user);
         // Handle success, e.g., redirect to a success page or update the UI
         if (data.role === "Parent or Student") {
-          localStorage.setItem("auth-parent", data.user);
+          localStorage.setItem("auth-parent", JSON.stringify(data.user));
           navigate("/" + urls.PARENT_DASHBOARD);
         } else {
-          localStorage.setItem("auth-tutor", data.user);
+          localStorage.setItem("auth-tutor", JSON.stringify(data.user));
           navigate("/" + urls.TUTOR_DASHBOARD);
         }
       } else {

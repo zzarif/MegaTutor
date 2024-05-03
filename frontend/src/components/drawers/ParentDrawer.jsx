@@ -112,7 +112,7 @@ const ParentDrawer = ({ children }) => {
             />
 
             <Typography fontFamily={"Poppins"} fontSize={20}>
-              John Doe
+              {JSON.parse(localStorage.getItem("auth-parent")).displayName}
             </Typography>
           </Box>
         )}
