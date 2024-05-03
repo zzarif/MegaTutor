@@ -6,6 +6,7 @@ import {
   Checkbox,
   FormControlLabel,
   Box,
+  Divider,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { urls } from "../../constants/urls";
@@ -23,6 +24,18 @@ function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
+
+  const [result, setResult] = useState({
+    hscRegiNo:"",hscYear:"",hscGPA:"",
+    sscRegiNo:"",sscYear:"",sscGPA:""
+  });
+  const handleResultChange = e => {
+    const { name, value } = e.target;
+    setResult(prevState => ({
+        ...prevState,
+        [name]: value
+    }));
+};
 
   const [checked, setChecked] = useState(false);
 
@@ -53,7 +66,7 @@ function SignupPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, phone, email, password, role }),
+        body: JSON.stringify({ name, phone, email, password, role, result }),
       });
 
       if (response.ok) {
@@ -133,6 +146,76 @@ function SignupPage() {
           fullWidth
           margin="normal"
         />
+        {role === "Tutor" && (
+          <>
+            <Typography
+              mt={3}
+              ml={1}
+              fontFamily={"Poppins"}
+            >
+              Academic Information (HSC)
+            </Typography>
+            <TextField
+              name="hscRegiNo"
+              label="Registration No."
+              value={result.hscRegiNo}
+              onChange={handleResultChange}
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              name="hscYear"
+              label="Year"
+              type="number"
+              value={result.hscYear}
+              onChange={handleResultChange}
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              name="hscGPA"
+              label="GPA"
+              type="decimal"
+              value={result.hscGPA}
+              onChange={handleResultChange}
+              fullWidth
+              margin="normal"
+            />
+            <Typography
+              mt={3}
+              ml={1}
+              fontFamily={"Poppins"}
+            >
+              Academic Information (SSC)
+            </Typography>
+            <TextField
+              name="sscRegiNo"
+              label="Registration No."
+              value={result.sscRegiNo}
+              onChange={handleResultChange}
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              name="sscYear"
+              label="Year"
+              type="number"
+              value={result.sscYear}
+              onChange={handleResultChange}
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              name="sscGPA"
+              label="GPA"
+              type="decimal"
+              value={result.sscGPA}
+              onChange={handleResultChange}
+              fullWidth
+              margin="normal"
+            />
+          </>
+        )}
         <FormControlLabel
           control={<Checkbox />}
           checked={checked}

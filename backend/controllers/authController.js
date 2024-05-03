@@ -4,13 +4,13 @@ const {
   signInWithEmailAndPassword,
   updateProfile,
 } = require("firebase/auth");
-const { doc, setDoc, getDoc } = require("firebase/firestore");
+const { doc, setDoc, getDoc, updateDoc } = require("firebase/firestore");
 const { auth, db } = require("../config/firebase");
 // const bcrypt = require('bcrypt');
 
 // Register parent
 const register = async (req, res) => {
-  const { name, phone, email, password, role } = req.body;
+  const { name, phone, email, password, role, result } = req.body;
 
   try {
     // Check if the user already exists
@@ -49,6 +49,14 @@ const register = async (req, res) => {
       });
 
       res.status(201).json({ message: "User registered successfully", user });
+
+      // verify if tutor
+      if(role === "Tutor" && result.hscRegiNo && result.sscRegiNo) {
+        await updateDoc(doc(db, process.env.USERS_COLLECTION, user.uid), {
+          ...result,
+          verified: true,
+        });
+      }
     }
   } catch (error) {
     console.error("Error registering user:", error);
