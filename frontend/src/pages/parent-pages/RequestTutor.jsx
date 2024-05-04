@@ -77,6 +77,24 @@ const RequestTutor = () => {
     }
   };
 
+  const validation = () => {
+    if (
+      studentName &&
+      studentGender &&
+      institute &&
+      subjects &&
+      level &&
+      medium &&
+      category &&
+      location &&
+      daysPerWeek &&
+      salary &&
+      details
+    )
+      requestTutor();
+    else alert("Please fill up all the information.");
+  };
+
   return (
     <Container maxWidth="sm">
       <Typography
@@ -237,7 +255,7 @@ const RequestTutor = () => {
             startIcon={<RequestPage />}
             loadingPosition="start"
             sx={btnStyles2}
-            onClick={requestTutor}
+            onClick={validation}
             variant="contained"
             color="primary"
           >
