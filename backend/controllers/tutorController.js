@@ -7,6 +7,7 @@ const {
   query,
   updateDoc,
   doc,
+  getDoc,
 } = require("firebase/firestore");
 const { db } = require("../config/firebase");
 
@@ -53,7 +54,7 @@ const applyForJob = async (req, res) => {
   }
 };
 
-const getCurrentApplications = async (req, res) => {
+const getMyApplications = async (req, res) => {
   const { tutorId } = req.query;
   try {
     const snapshot = await getDocs(
@@ -63,7 +64,13 @@ const getCurrentApplications = async (req, res) => {
         where("status", "==", "applied")
       )
     );
-    res.status(200).json(snapshot.docs.map((doc) => doc.data()));
+    const promises = snapshot.docs.map(async (item) => {
+      const jobId = item.data().jobId;
+      const job = await getDoc(doc(db, process.env.JOBS_COLLECTION, jobId));
+      return job.data();
+    });
+    const myApplications = await Promise.all(promises);
+    res.status(200).json(myApplications);
   } catch (error) {
     console.error("Error fetching current applications:", error);
     res.status(500).json({ error: "Failed to current applications." });
@@ -80,7 +87,13 @@ const getMyJobs = async (req, res) => {
         where("status", "==", "confirmed")
       )
     );
-    res.status(200).json(snapshot.docs.map((doc) => doc.data()));
+    const promises = snapshot.docs.map(async (item) => {
+      const jobId = item.data().jobId;
+      const job = await getDoc(doc(db, process.env.JOBS_COLLECTION, jobId));
+      return job.data();
+    });
+    const myJobs = await Promise.all(promises);
+    res.status(200).json(myJobs);
   } catch (error) {
     console.error("Error fetching my jobs:", error);
     res.status(500).json({ error: "Failed to fetch my jobs." });
@@ -90,6 +103,6 @@ const getMyJobs = async (req, res) => {
 module.exports = {
   getAvailableJobs,
   applyForJob,
-  getCurrentApplications,
+  getMyApplications,
   getMyJobs,
 };

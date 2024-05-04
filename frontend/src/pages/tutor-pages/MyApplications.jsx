@@ -24,7 +24,7 @@ const MyApplications = () => {
     setLoading(true);
     const tutorId = JSON.parse(localStorage.getItem("auth-tutor")).uid;
     try {
-      const url = new URL(import.meta.env.VITE_API_BASE_URL + "getCurrentApplications");
+      const url = new URL(import.meta.env.VITE_API_BASE_URL + "getMyApplications");
       url.searchParams.append("tutorId", tutorId);
       const response = await fetch(url, {
         method: "GET",
