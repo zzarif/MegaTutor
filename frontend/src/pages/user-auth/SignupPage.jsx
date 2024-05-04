@@ -84,12 +84,12 @@ function SignupPage() {
         const errorData = await response.json();
         console.error("Error registering user:", errorData.error);
         // Handle error, e.g., display an error message to the user
-        alert("Error registering user");
+        alert(errorData.error);
       }
     } catch (error) {
       console.error("Error registering user:", error);
       // Handle network or other errors
-      alert("Error registering user");
+      alert(error);
     } finally {
       setLoading(false);
     }

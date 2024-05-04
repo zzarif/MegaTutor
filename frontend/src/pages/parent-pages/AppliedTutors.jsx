@@ -8,12 +8,7 @@ import {
   Divider,
 } from "@mui/material";
 import CustomCard from "../../styles/customCard";
-import {
-  Check,
-  EventNoteRounded,
-  School,
-  Verified,
-} from "@mui/icons-material";
+import { Check, EventNoteRounded, School, Verified } from "@mui/icons-material";
 import FacebookCircularProgress from "../../components/fbspinner/FacebookCircularProgress";
 import { centered } from "../../styles/centered";
 import { LoadingButton } from "@mui/lab";
@@ -147,8 +142,11 @@ const AppliedTutors = () => {
                     component="p"
                     fontFamily={"Poppins"}
                   >
-                    <b>HSC Result: GPA {item.hscGPA}</b> - Regi No:{" "}
-                    {item.hscRegiNo} - Year: {item.hscYear}
+                    <b>
+                      HSC Result: GPA{" "}
+                      {item.hscGPA ? item.hscGPA : "Not Provided"}
+                    </b>{" "}
+                    - Regi No: {item.hscRegiNo} - Year: {item.hscYear}
                   </Typography>
                 </Box>
                 <Box m={1.5} display="flex" alignItems="center" gap={1}>
@@ -158,8 +156,11 @@ const AppliedTutors = () => {
                     component="p"
                     fontFamily={"Poppins"}
                   >
-                    <b>SSC Result: GPA {item.sscGPA}</b> - Regi No:{" "}
-                    {item.sscRegiNo} - Year: {item.sscYear}
+                    <b>
+                      SSC Result: GPA{" "}
+                      {item.sscGPA ? item.sscGPA : "Not Provided"}
+                    </b>{" "}
+                    - Regi No: {item.sscRegiNo} - Year: {item.sscYear}
                   </Typography>
                 </Box>
                 <Divider />

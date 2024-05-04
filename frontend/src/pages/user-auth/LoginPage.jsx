@@ -54,12 +54,12 @@ function LoginPage() {
         const errorData = await response.json();
         console.error("Error logging in user:", errorData.error);
         // Handle error, e.g., display an error message to the user
-        alert("Error logging in user");
+        alert(errorData.error);
       }
     } catch (error) {
       console.error("Error logging in user:", error);
       // Handle network or other errors
-      alert("Error logging in user");
+      alert(error);
     } finally {
       setLoading(false);
     }

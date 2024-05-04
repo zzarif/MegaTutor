@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import CustomCard from "../../styles/customCard";
 import {
+  Check,
   EventNoteRounded,
   LocationOnRounded,
   School,
@@ -191,6 +192,7 @@ const AvailableJobs = () => {
               </CardContent>
               <LoadingButton
                 loading={applyLoadingStates[idx]}
+                startIcon={<Check />}
                 loadingPosition="start"
                 sx={btnStyles3}
                 onClick={() => applyForJob(item.jobId, idx)}

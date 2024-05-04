@@ -15,6 +15,7 @@ import { btnStyles2 } from "../../styles/btnStyles2";
 import { urls } from "../../constants/urls";
 import { useNavigate } from "react-router-dom";
 import { textFieldStyles } from "../../styles/textFieldStyles";
+import { RequestPage } from "@mui/icons-material";
 
 const RequestTutor = () => {
   const navigate = useNavigate();
@@ -233,6 +234,7 @@ const RequestTutor = () => {
         <Grid item xs={12}>
           <LoadingButton
             loading={loading}
+            startIcon={<RequestPage />}
             loadingPosition="start"
             sx={btnStyles2}
             onClick={requestTutor}
