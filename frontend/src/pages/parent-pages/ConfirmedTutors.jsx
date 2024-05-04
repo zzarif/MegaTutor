@@ -8,11 +8,7 @@ import {
   Divider,
 } from "@mui/material";
 import CustomCard from "../../styles/customCard";
-import {
-  EventNoteRounded,
-  LocationOnRounded,
-  School,
-} from "@mui/icons-material";
+import { EventNoteRounded, School, Verified } from "@mui/icons-material";
 import FacebookCircularProgress from "../../components/fbspinner/FacebookCircularProgress";
 import { centered } from "../../styles/centered";
 
@@ -80,9 +76,51 @@ const ConfirmedTutors = () => {
           <Box key={idx}>
             <CustomCard>
               <CardContent>
+                <Box m={1.5} display="flex" alignItems="center" gap={1}>
+                  <Avatar />
+                  <Box>
+                    <Box display="flex" alignItems="center" gap={1}>
+                      <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        fontFamily={"Poppins"}
+                      >
+                        <b>{item.name}</b>
+                      </Typography>
+                      {item.verified && <Verified sx={{ color: "green" }} />}
+                    </Box>
+                    <Typography mt={-0.5} color="textSecondary">
+                      {item.email}
+                    </Typography>
+                  </Box>
+                </Box>
+
+                <Box m={1.5} display="flex" alignItems="center" gap={1}>
+                  <School sx={{ color: "gray" }} />
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    fontFamily={"Poppins"}
+                  >
+                    <b>HSC Result: GPA {item.hscGPA}</b> - Regi No:{" "}
+                    {item.hscRegiNo} - Year: {item.hscYear}
+                  </Typography>
+                </Box>
+                <Box m={1.5} display="flex" alignItems="center" gap={1}>
+                  <School sx={{ color: "gray" }} />
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    fontFamily={"Poppins"}
+                  >
+                    <b>SSC Result: GPA {item.sscGPA}</b> - Regi No:{" "}
+                    {item.sscRegiNo} - Year: {item.sscYear}
+                  </Typography>
+                </Box>
+                <Divider />
                 <Box m={1.5} display="flex" justifyContent="space-between">
                   <Box display="flex" alignItems="center" gap={1}>
-                    <Avatar />
                     <Box>
                       <Typography
                         variant="h6"
@@ -90,7 +128,7 @@ const ConfirmedTutors = () => {
                         component="div"
                         fontFamily={"Poppins"}
                       >
-                        <b>{item.studentName}</b>
+                        Doing Job: {item.studentName}
                       </Typography>
                       <Typography mt={-0.5} color="textSecondary">
                         {item.institute}
@@ -102,48 +140,17 @@ const ConfirmedTutors = () => {
                   </Typography>
                 </Box>
 
-                <Divider />
-                <Box m={2} display="flex" alignItems="center" gap={1}>
-                  <School sx={{ color: "gray" }} />
-                  <Typography
-                    variant="body2"
-                    component="p"
-                    fontFamily={"Poppins"}
-                  >
-                    <b>{item.subjects}</b> - Standard {item.level} (
-                    {item.medium} Medium)
-                  </Typography>
-                </Box>
-
-                <Box m={2} display="flex" alignItems="center" gap={1}>
-                  <LocationOnRounded sx={{ color: "gray" }} />
-                  <Typography
-                    variant="body2"
-                    component="p"
-                    fontFamily={"Poppins"}
-                  >
-                    <b>{item.location}</b> ({item.daysPerWeek})
-                  </Typography>
-                </Box>
-                <Divider />
-                <Box mt={2} ml={2} display="flex" gap={1}>
+                <Box ml={1.5} display="flex" alignItems="center" gap={1}>
                   <Typography
                     variant="body2"
                     component="p"
                     color="textSecondary"
                     fontFamily={"Poppins"}
                   >
-                    {Date(item.createdAt)}
-                  </Typography>
-                </Box>
-                <Box ml={2} display="flex" gap={1}>
-                  <Typography
-                    variant="body2"
-                    component="p"
-                    color="textSecondary"
-                    fontFamily={"Poppins"}
-                  >
-                    Note: {item.details}
+                    {item.subjects} - Standard {item.level} ({item.medium}{" "}
+                    Medium)
+                    <br />
+                    {item.location} ({item.daysPerWeek})
                   </Typography>
                 </Box>
               </CardContent>

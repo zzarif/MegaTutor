@@ -206,7 +206,7 @@ const RequestTutor = () => {
               <MenuItem value="2 days / week">2 days / week</MenuItem>
               <MenuItem value="3 days / week">3 days / week</MenuItem>
               <MenuItem value="4 days / week">4 days / week</MenuItem>
-              <MenuItem value="5 days / week">4 days / week</MenuItem>
+              <MenuItem value="5 days / week">5 days / week</MenuItem>
             </Select>
           </FormControl>
         </Grid>

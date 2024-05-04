@@ -5,6 +5,9 @@ const {
   getDocs,
   where,
   query,
+  getDoc,
+  doc,
+  updateDoc,
 } = require("firebase/firestore");
 const { db } = require("../config/firebase");
 
@@ -51,10 +54,51 @@ const getAppliedTutors = async (req, res) => {
         where("status", "==", "applied")
       )
     );
-    res.status(200).json(snapshot.docs.map((doc) => doc.data()));
+    const promises = snapshot.docs.map(async (job) => {
+      const applications = await getDocs(
+        query(
+          collection(db, process.env.APPLICATIONS_COLLECTION),
+          where("jobId", "==", job.id)
+        )
+      );
+      const tutor = await getDoc(
+        doc(
+          db,
+          process.env.USERS_COLLECTION,
+          applications.docs[0].data().tutorId
+        )
+      );
+      return {
+        applicationId: applications.docs[0].id,
+        jobId: job.id,
+        ...tutor.data(),
+        ...job.data(),
+      };
+    });
+    const appliedTutors = await Promise.all(promises);
+    res.status(200).json(appliedTutors);
   } catch (error) {
     console.error("Error fetching applied tutors:", error);
     res.status(500).json({ error: "Failed to applied tutors." });
+  }
+};
+
+const confirmJob = async (req, res) => {
+  const { jobId, applicationId } = req.body;
+  try {
+    await updateDoc(doc(db, process.env.JOBS_COLLECTION, jobId), {
+      status: "confirmed",
+    });
+    await updateDoc(
+      doc(db, process.env.APPLICATIONS_COLLECTION, applicationId),
+      {
+        status: "confirmed",
+      }
+    );
+    res.status(200).json({ message: "Job confirmed." });
+  } catch (error) {
+    console.error("Error confirming job:", error);
+    res.status(500).json({ error: "Failed to confirm job." });
   }
 };
 
@@ -68,7 +112,29 @@ const getConfirmedTutors = async (req, res) => {
         where("status", "==", "confirmed")
       )
     );
-    res.status(200).json(snapshot.docs.map((doc) => doc.data()));
+    const promises = snapshot.docs.map(async (job) => {
+      const applications = await getDocs(
+        query(
+          collection(db, process.env.APPLICATIONS_COLLECTION),
+          where("jobId", "==", job.id)
+        )
+      );
+      const tutor = await getDoc(
+        doc(
+          db,
+          process.env.USERS_COLLECTION,
+          applications.docs[0].data().tutorId
+        )
+      );
+      return {
+        applicationId: applications.docs[0].id,
+        jobId: job.id,
+        ...tutor.data(),
+        ...job.data(),
+      };
+    });
+    const appliedTutors = await Promise.all(promises);
+    res.status(200).json(appliedTutors);
   } catch (error) {
     console.error("Error fetching confirmed tutors:", error);
     res.status(500).json({ error: "Failed to confirmed tutors." });
@@ -79,5 +145,6 @@ module.exports = {
   postNewJob,
   getPostedJobs,
   getAppliedTutors,
+  confirmJob,
   getConfirmedTutors,
 };
