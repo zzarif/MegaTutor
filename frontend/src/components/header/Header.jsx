@@ -21,7 +21,7 @@ function Header() {
         variant="h5"
       >
         <School sx={{ mb: -0.4, mr: 0.1 }} />
-        MegaTutor
+        <b>MegaTutor</b>
       </Typography>
       <Box>
         <Button

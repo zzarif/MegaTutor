@@ -1,0 +1,10 @@
+.hero_image {
+  width: 400px;
+  height: auto;
+}
+
+@media (max-width: 800px) {
+  .hero_image {
+    width: 300px;
+  }
+}

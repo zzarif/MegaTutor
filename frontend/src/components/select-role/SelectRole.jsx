@@ -5,6 +5,7 @@ import Radio, { radioClasses } from "@mui/joy/Radio";
 import RadioGroup from "@mui/joy/RadioGroup";
 import Sheet from "@mui/joy/Sheet";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import { Grid } from "@mui/material";
 
 export default function SelectRole({ role, setRole }) {
   const roles = ["Parent or Student", "Tutor"];
@@ -40,30 +41,34 @@ export default function SelectRole({ role, setRole }) {
         },
       }}
     >
-      {roles.map((value) => (
-        <Sheet
-          key={value}
-          variant="outlined"
-          sx={{
-            borderRadius: "md",
-            boxShadow: "sm",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 1.5,
-            p: 2,
-            minWidth: 235,
-          }}
-        >
-          <Radio
-            id={value}
-            value={value}
-            checkedIcon={<CheckCircleRoundedIcon />}
-          />
-          <Avatar variant="soft" size="sm" />
-          <FormLabel htmlFor={value}>{value}</FormLabel>
-        </Sheet>
-      ))}
+      <Grid container spacing={2}>
+        {roles.map((value) => (
+          <Grid item xs={12} sm={6}>
+            <Sheet
+              key={value}
+              variant="outlined"
+              sx={{
+                borderRadius: "md",
+                boxShadow: "sm",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1.5,
+                p: 2,
+                minWidth: 235,
+              }}
+            >
+              <Radio
+                id={value}
+                value={value}
+                checkedIcon={<CheckCircleRoundedIcon />}
+              />
+              <Avatar variant="soft" size="sm" />
+              <FormLabel htmlFor={value}>{value}</FormLabel>
+            </Sheet>
+          </Grid>
+        ))}
+      </Grid>
     </RadioGroup>
   );
 }

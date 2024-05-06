@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, Typography, Grid, Card, CardContent } from "@mui/material";
+import { Box, Typography, Grid, CardContent } from "@mui/material";
 import { Person } from "@mui/icons-material";
+import CustomCard2 from "../../styles/customCard2";
 
 function TuitionTypes() {
   return (
@@ -11,12 +12,12 @@ function TuitionTypes() {
       justifyContent="center"
       mb={4}
     >
-      <Typography m={1} fontFamily={"Poppins"} variant="h5">
-        Tuition Types
+      <Typography m={2} fontFamily={"Poppins"} variant="h5">
+        <b>Tuition Types</b>
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <Card>
+          <CustomCard2>
             <CardContent>
               <Typography fontFamily={"Poppins"} variant="h6">
                 <Person sx={{ mb: -0.4, mr: 0.1 }} />
@@ -27,10 +28,10 @@ function TuitionTypes() {
                 own home.
               </Typography>
             </CardContent>
-          </Card>
+          </CustomCard2>
         </Grid>
         <Grid item xs={6}>
-          <Card>
+          <CustomCard2>
             <CardContent>
               <Typography fontFamily={"Poppins"} variant="h6">
                 <Person sx={{ mb: -0.4, mr: 0.1 }} />
@@ -41,10 +42,10 @@ function TuitionTypes() {
                 problems at an affordable price.
               </Typography>
             </CardContent>
-          </Card>
+          </CustomCard2>
         </Grid>
         <Grid item xs={6}>
-          <Card>
+          <CustomCard2>
             <CardContent>
               <Typography fontFamily={"Poppins"} variant="h6">
                 <Person sx={{ mb: -0.4, mr: 0.1 }} />
@@ -55,10 +56,10 @@ function TuitionTypes() {
                 problems at an affordable price.
               </Typography>
             </CardContent>
-          </Card>
+          </CustomCard2>
         </Grid>
         <Grid item xs={6}>
-          <Card>
+          <CustomCard2>
             <CardContent>
               <Typography fontFamily={"Poppins"} variant="h6">
                 <Person sx={{ mb: -0.4, mr: 0.1 }} />
@@ -69,7 +70,7 @@ function TuitionTypes() {
                 problems at an affordable price.
               </Typography>
             </CardContent>
-          </Card>
+          </CustomCard2>
         </Grid>
       </Grid>
     </Box>
