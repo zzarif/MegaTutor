@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Grid, CardContent } from "@mui/material";
+import { Box, Typography, Grid, CardContent, Avatar } from "@mui/material";
 import { Person } from "@mui/icons-material";
 import CustomCard2 from "../../styles/customCard2";
 
@@ -19,56 +19,72 @@ function TuitionTypes() {
         <Grid item xs={6}>
           <CustomCard2>
             <CardContent>
-              <Typography fontFamily={"Poppins"} variant="h6">
-                <Person sx={{ mb: -0.4, mr: 0.1 }} />
-                Home Tutoring
-              </Typography>
-              <Typography fontFamily={"Poppins"}>
-                Home tutoring allows students to learn various subjects in their
-                own home.
-              </Typography>
+              <Box display="flex" alignItems="center" gap={1}>
+                <Avatar />
+                <Box>
+                  <Typography fontFamily={"Poppins"} variant="h6">
+                    <b>Home Tutoring</b>
+                  </Typography>
+                  <Typography color="textSecondary" fontFamily={"Poppins"}>
+                    Home tutoring allows students to learn various subjects in
+                    their own home.
+                  </Typography>
+                </Box>
+              </Box>
             </CardContent>
           </CustomCard2>
         </Grid>
         <Grid item xs={6}>
           <CustomCard2>
             <CardContent>
-              <Typography fontFamily={"Poppins"} variant="h6">
-                <Person sx={{ mb: -0.4, mr: 0.1 }} />
-                Group Tutoring
-              </Typography>
-              <Typography fontFamily={"Poppins"}>
-                Group tutoring allows students to learn together and share
-                problems at an affordable price.
-              </Typography>
+              <Box display="flex" alignItems="center" gap={1}>
+                <Avatar />
+                <Box>
+                  <Typography fontFamily={"Poppins"} variant="h6">
+                    <b>Group Tutoring</b>
+                  </Typography>
+                  <Typography color="textSecondary" fontFamily={"Poppins"}>
+                    Group tutoring allows students to learn together and share
+                    problems at an affordable price.
+                  </Typography>
+                </Box>
+              </Box>
             </CardContent>
           </CustomCard2>
         </Grid>
         <Grid item xs={6}>
           <CustomCard2>
             <CardContent>
-              <Typography fontFamily={"Poppins"} variant="h6">
-                <Person sx={{ mb: -0.4, mr: 0.1 }} />
-                Online Tutoring
-              </Typography>
-              <Typography fontFamily={"Poppins"}>
-                Group tutoring allows students to learn together and share
-                problems at an affordable price.
-              </Typography>
+              <Box display="flex" alignItems="center" gap={1}>
+                <Avatar />
+                <Box>
+                  <Typography fontFamily={"Poppins"} variant="h6">
+                    <b>Online Tutoring</b>
+                  </Typography>
+                  <Typography color="textSecondary" fontFamily={"Poppins"}>
+                    Find the best tutors from anywhere and take online classes
+                    by tools such as Google Meet, Skype and Zoom.
+                  </Typography>
+                </Box>
+              </Box>
             </CardContent>
           </CustomCard2>
         </Grid>
         <Grid item xs={6}>
           <CustomCard2>
             <CardContent>
-              <Typography fontFamily={"Poppins"} variant="h6">
-                <Person sx={{ mb: -0.4, mr: 0.1 }} />
-                Package Tutoring
-              </Typography>
-              <Typography fontFamily={"Poppins"}>
-                Group tutoring allows students to learn together and share
-                problems at an affordable price.
-              </Typography>
+              <Box display="flex" alignItems="center" gap={1}>
+                <Avatar />
+                <Box>
+                  <Typography fontFamily={"Poppins"} variant="h6">
+                    <b>Package Tutoring</b>
+                  </Typography>
+                  <Typography color="textSecondary" fontFamily={"Poppins"}>
+                    Package Tutoring helps a student to complete their studies
+                    within a specific time frame.
+                  </Typography>
+                </Box>
+              </Box>
             </CardContent>
           </CustomCard2>
         </Grid>
