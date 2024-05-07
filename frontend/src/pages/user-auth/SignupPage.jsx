@@ -84,7 +84,7 @@ function SignupPage() {
         const errorData = await response.json();
         console.error("Error registering user:", errorData.error);
         // Handle error, e.g., display an error message to the user
-        alert(errorData.error);
+        alert(errorData.error + "(Try stronger passwords)");
       }
     } catch (error) {
       console.error("Error registering user:", error);
