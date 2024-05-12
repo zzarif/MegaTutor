@@ -6,6 +6,12 @@ dotenv.config({
 	debug: true
 });
 
+const {
+  getAvailableJobs,
+  applyForJob,
+  getMyApplications,
+  getMyJobs,
+} = require("../controllers/tutorController");
 
 const Stripe = require('stripe');
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
@@ -56,6 +62,7 @@ module.exports.processPayment = async (req, res) => {
       throw err;
       console.log(err);
     });
+   await confirmJob(booking_id, session.id);
 
     res.status(200).json({
       status: 200,
