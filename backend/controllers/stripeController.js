@@ -8,7 +8,7 @@ const processPayment = async (req, res) => {
       .create({
         payment_method_types: ["card"],
         client_reference_id: booking_id,
-        user_email: user_email ?? "",
+        customer_email: user_email ?? "",
         line_items: [
           {
             price_data: {
