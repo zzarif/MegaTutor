@@ -11,6 +11,8 @@ import CustomCard from "../../styles/customCard";
 import { EventNoteRounded, School, Verified } from "@mui/icons-material";
 import FacebookCircularProgress from "../../components/fbspinner/FacebookCircularProgress";
 import { centered } from "../../styles/centered";
+import PreviewVerification from "../../components/verfication-preview/PreviewVerification";
+import { IconButton } from "@mui/joy";
 
 const ConfirmedTutors = () => {
   const [jobList, setJobList] = useState([]);
@@ -48,6 +50,8 @@ const ConfirmedTutors = () => {
   useEffect(() => {
     fetchConfirmedTutors();
   }, []);
+
+  const [open, setOpen] = useState(false);
 
   return (
     <Container maxWidth="sm">
@@ -88,7 +92,11 @@ const ConfirmedTutors = () => {
                       >
                         <b>{item.name}</b>
                       </Typography>
-                      {item.verified && <Verified sx={{ color: "green" }} />}
+                      {item.verified && (
+                        <IconButton onClick={() => setOpen(true)}>
+                          <Verified sx={{ color: "green" }} />
+                        </IconButton>
+                      )}
                     </Box>
                     <Typography mt={-0.5} color="textSecondary">
                       {item.email}
@@ -158,6 +166,7 @@ const ConfirmedTutors = () => {
           </Box>
         ))
       )}
+      <PreviewVerification open={open} setOpen={setOpen} />
     </Container>
   );
 };

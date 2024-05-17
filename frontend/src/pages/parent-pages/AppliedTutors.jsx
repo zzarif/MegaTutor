@@ -15,6 +15,8 @@ import { LoadingButton } from "@mui/lab";
 import { btnStyles3 } from "../../styles/btnStyles3";
 import { urls } from "../../constants/urls";
 import { useNavigate } from "react-router-dom";
+import { IconButton } from "@mui/joy";
+import PreviewVerification from "../../components/verfication-preview/PreviewVerification";
 
 const AppliedTutors = () => {
   const navigate = useNavigate();
@@ -88,6 +90,8 @@ const AppliedTutors = () => {
     }
   };
 
+  const [open, setOpen] = useState(false);
+
   return (
     <Container maxWidth="sm">
       <Typography
@@ -127,7 +131,11 @@ const AppliedTutors = () => {
                       >
                         <b>{item.name}</b>
                       </Typography>
-                      {item.verified && <Verified sx={{ color: "green" }} />}
+                      {item.verified && (
+                        <IconButton onClick={() => setOpen(true)}>
+                          <Verified sx={{ color: "green" }} />
+                        </IconButton>
+                      )}
                     </Box>
                     <Typography mt={-0.5} color="textSecondary">
                       {item.email}
@@ -214,6 +222,7 @@ const AppliedTutors = () => {
           </Box>
         ))
       )}
+      <PreviewVerification open={open} setOpen={setOpen} />
     </Container>
   );
 };
