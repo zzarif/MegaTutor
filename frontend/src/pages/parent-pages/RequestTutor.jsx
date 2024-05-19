@@ -146,13 +146,29 @@ const RequestTutor = () => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
-            label="Standard"
-            fullWidth
-            sx={textFieldStyles}
-            value={level}
-            onChange={(e) => setLevel(e.target.value)}
-          />
+          <FormControl fullWidth>
+            <InputLabel id="medium-label">Select Standard</InputLabel>
+            <Select
+              sx={textFieldStyles}
+              labelId="Standard-label"
+              id="Standard-select"
+              label="Select Standard"
+              value={level}
+              onChange={(e) => setLevel(e.target.value)}
+            >
+              <MenuItem value="">Select Standard</MenuItem>
+              <MenuItem value="1">Standard 1</MenuItem>
+              <MenuItem value="2">Standard 2</MenuItem>
+              <MenuItem value="3">Standard 3</MenuItem>
+              <MenuItem value="4">Standard 4</MenuItem>
+              <MenuItem value="5">Standard 5</MenuItem>
+              <MenuItem value="6">Standard 6</MenuItem>
+              <MenuItem value="7">Standard 7</MenuItem>
+              <MenuItem value="8">Standard 8</MenuItem>
+              <MenuItem value="9">Standard 9</MenuItem>
+              <MenuItem value="10">Standard 10</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
         <Grid item xs={12}>
           <TextField
