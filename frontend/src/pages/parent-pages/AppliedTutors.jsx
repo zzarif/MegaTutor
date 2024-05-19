@@ -14,11 +14,9 @@ import { Check, EventNoteRounded, School, Verified } from "@mui/icons-material";
 import FacebookCircularProgress from "../../components/fbspinner/FacebookCircularProgress";
 import { centered } from "../../styles/centered";
 import { btnStyles3 } from "../../styles/btnStyles3";
-import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/joy";
 
 const AppliedTutors = () => {
-  const navigate = useNavigate();
   const [jobList, setJobList] = useState([]);
 
   const [loading, setLoading] = useState(false);
@@ -74,7 +72,7 @@ const AppliedTutors = () => {
       if (response.ok) {
         const json = await response.json();
         const paymentPageLink = json.data.session_url;
-        navigate(paymentPageLink);
+        window.location.href = paymentPageLink;
       } else {
         const errorData = await response.json();
         alert(errorData.error);
