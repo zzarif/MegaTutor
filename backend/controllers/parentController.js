@@ -84,7 +84,7 @@ const getAppliedTutors = async (req, res) => {
 };
 
 const confirmJob = async (req, res) => {
-  const { jobId, applicationId } = req.body;
+  const { jobId, applicationId } = req.query;
   try {
     await updateDoc(doc(db, process.env.JOBS_COLLECTION, jobId), {
       status: "confirmed",
@@ -95,7 +95,7 @@ const confirmJob = async (req, res) => {
         status: "confirmed",
       }
     );
-    res.status(200).json({ message: "Job confirmed." });
+    res.status(200).send(`Payment Successful and Tutor confirmed. <a href="https://megatutor.vercel.app/confirmed-tutors">View status</a>.`);
   } catch (error) {
     console.error("Error confirming job:", error);
     res.status(500).json({ error: "Failed to confirm job." });

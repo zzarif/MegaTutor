@@ -6,17 +6,16 @@ import {
   Box,
   Avatar,
   Divider,
+  Button,
 } from "@mui/material";
 import CustomCard from "../../styles/customCard";
+import PreviewVerification from "../../components/verfication-preview/PreviewVerification";
 import { Check, EventNoteRounded, School, Verified } from "@mui/icons-material";
 import FacebookCircularProgress from "../../components/fbspinner/FacebookCircularProgress";
 import { centered } from "../../styles/centered";
-import { LoadingButton } from "@mui/lab";
 import { btnStyles3 } from "../../styles/btnStyles3";
-import { urls } from "../../constants/urls";
 import { useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/joy";
-import PreviewVerification from "../../components/verfication-preview/PreviewVerification";
 
 const AppliedTutors = () => {
   const navigate = useNavigate();
@@ -56,26 +55,26 @@ const AppliedTutors = () => {
     fetchAppliedTutors();
   }, []);
 
-  const [confirmLoadingStates, setConfirmLoadingStates] = useState([]);
-  const confirmJob = async (jobId, applicationId, idx) => {
-    // loading animation on button
-    const updatedConfirmLoadingStates = [...confirmLoadingStates];
-    updatedConfirmLoadingStates[idx] = true;
-    setConfirmLoadingStates(updatedConfirmLoadingStates);
+  const handlePayment = async (jobId, applicationId) => {
     try {
-      const url = new URL(import.meta.env.VITE_API_BASE_URL + "confirmJob");
+      const url = new URL(import.meta.env.VITE_API_BASE_URL + "processPayment");
+      const success_url = `${
+        import.meta.env.VITE_API_BASE_URL
+      }confirmJob?jobId=${jobId}&applicationId=${applicationId}`;
+      const cancel_url =
+        "https://tsparticles.github.io/404-templates/simple/404.html";
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ applicationId, jobId }),
+        body: JSON.stringify({ success_url, cancel_url }),
       });
 
       if (response.ok) {
-        const data = await response.json();
-        alert(data.message);
-        navigate("/" + urls.CONFIRMED_TUTORS);
+        const json = await response.json();
+        const paymentPageLink = json.data.session_url;
+        navigate(paymentPageLink);
       } else {
         const errorData = await response.json();
         alert(errorData.error);
@@ -83,10 +82,6 @@ const AppliedTutors = () => {
     } catch (error) {
       console.error("Error:", error);
       alert(error);
-    } finally {
-      // revert button states to normal
-      updatedConfirmLoadingStates[idx] = false;
-      setConfirmLoadingStates(updatedConfirmLoadingStates);
     }
   };
 
@@ -207,17 +202,15 @@ const AppliedTutors = () => {
                   </Typography>
                 </Box>
               </CardContent>
-              <LoadingButton
-                loading={confirmLoadingStates[idx]}
+              <Button
                 startIcon={<Check />}
-                loadingPosition="start"
                 sx={btnStyles3}
-                onClick={() => confirmJob(item.jobId, item.applicationId, idx)}
+                onClick={() => handlePayment(item.jobId, item.applicationId)}
                 variant="contained"
                 color="primary"
               >
-                <b>Confirm Job</b>
-              </LoadingButton>
+                <b>Proceed to Checkout to Confirm Tutor</b>
+              </Button>
             </CustomCard>
           </Box>
         ))
