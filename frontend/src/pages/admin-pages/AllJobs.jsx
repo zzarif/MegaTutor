@@ -8,6 +8,12 @@ import {
   Divider,
 } from "@mui/material";
 import CustomCard from "../../styles/customCard";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import { StyledTableCell, StyledTableRow } from "../../styles/table_styles";
+import Paper from "@mui/material/Paper";
 import {
   EventNoteRounded,
   LocationOnRounded,
@@ -20,39 +26,37 @@ const AllJobs = () => {
   const [jobList, setJobList] = useState([]);
 
   const [loading, setLoading] = useState(false);
-  const fetchPostedJobs = async () => {
-    // setLoading(true);
-    // const parentId = JSON.parse(localStorage.getItem("auth-parent")).uid;
-    // try {
-    //   const url = new URL(import.meta.env.VITE_API_BASE_URL + "getPostedJobs");
-    //   url.searchParams.append("parentId", parentId);
-    //   const response = await fetch(url, {
-    //     method: "GET",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    //   if (response.ok) {
-    //     const data = await response.json();
-    //     setJobList(data);
-    //   } else {
-    //     const errorData = await response.json();
-    //     alert(errorData.error);
-    //   }
-    // } catch (error) {
-    //   console.error("Error:", error);
-    //   alert(error);
-    // } finally {
-    //   setLoading(false);
-    // }
+  const fetchAllTutors = async () => {
+    setLoading(true);
+    try {
+      const url = new URL(import.meta.env.VITE_API_BASE_URL + "getAllJobs");
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setJobList(data);
+      } else {
+        const errorData = await response.json();
+        alert(errorData.error);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    fetchPostedJobs();
+    fetchAllTutors();
   }, []);
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth={300}>
       <Typography
         m={4}
         fontFamily={"Poppins"}
@@ -74,80 +78,107 @@ const AllJobs = () => {
           </Typography>
         </Box>
       ) : (
-        jobList.map((item, idx) => (
-          <Box key={idx}>
-            <CustomCard>
-              <CardContent>
-                <Box m={1.5} display="flex" justifyContent="space-between">
-                  <Box display="flex" alignItems="center" gap={1}>
-                    <Avatar />
-                    <Box>
-                      <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        fontFamily={"Poppins"}
-                      >
-                        <b>{item.studentName}</b>
-                      </Typography>
-                      <Typography mt={-0.5} color="textSecondary">
-                        {item.institute}
-                      </Typography>
-                    </Box>
-                  </Box>
-                  <Typography variant="h4" component="p" fontFamily={"Poppins"}>
-                    ৳<b>{item.salary}</b>
-                  </Typography>
-                </Box>
-
-                <Divider />
-                <Box m={2} display="flex" alignItems="center" gap={1}>
-                  <School sx={{ color: "gray" }} />
-                  <Typography
-                    variant="body2"
-                    component="p"
-                    fontFamily={"Poppins"}
-                  >
-                    <b>{item.subjects}</b> - Standard {item.level} (
-                    {item.medium} Medium)
-                  </Typography>
-                </Box>
-
-                <Box m={2} display="flex" alignItems="center" gap={1}>
-                  <LocationOnRounded sx={{ color: "gray" }} />
-                  <Typography
-                    variant="body2"
-                    component="p"
-                    fontFamily={"Poppins"}
-                  >
-                    <b>{item.location}</b> ({item.daysPerWeek})
-                  </Typography>
-                </Box>
-                <Divider />
-                <Box mt={2} ml={2} display="flex" gap={1}>
-                  <Typography
-                    variant="body2"
-                    component="p"
-                    color="textSecondary"
-                    fontFamily={"Poppins"}
-                  >
-                    {Date(item.createdAt)}
-                  </Typography>
-                </Box>
-                <Box ml={2} display="flex" gap={1}>
-                  <Typography
-                    variant="body2"
-                    component="p"
-                    color="textSecondary"
-                    fontFamily={"Poppins"}
-                  >
-                    Note: {item.details}
-                  </Typography>
-                </Box>
-              </CardContent>
-            </CustomCard>
-          </Box>
-        ))
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <StyledTableRow>
+                <StyledTableCell>
+                  <b>Serial</b>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <b>medium</b>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <b>location</b>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <b>subjects</b>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <b>salary</b>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <b>category</b>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <b>level</b>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <b>institute</b>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <b>studentName</b>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <b>daysPerWeek</b>
+                </StyledTableCell>
+                {/* <StyledTableCell>
+                  <b>details</b>
+                </StyledTableCell> */}
+                <StyledTableCell>
+                  <b>studentGender</b>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <b>status</b>
+                </StyledTableCell>
+                <StyledTableCell>
+                  <b>parentId</b>
+                </StyledTableCell>
+              </StyledTableRow>
+            </TableHead>
+            <TableBody>
+              {jobList.map((row, idx) => (
+                <StyledTableRow
+                  key={idx}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <StyledTableCell component="th" scope="row">
+                    {idx + 1}
+                  </StyledTableCell>
+                  <StyledTableCell component="th" scope="row">
+                    {row.medium ? row.medium : "--"}
+                  </StyledTableCell>
+                  <StyledTableCell>
+                    {row.location ? row.location : "--"}
+                  </StyledTableCell>
+                  <StyledTableCell>
+                    {row.subjects ? row.subjects : "--"}
+                  </StyledTableCell>
+                  <StyledTableCell>
+                    {row.salary ? row.salary : "--"}
+                  </StyledTableCell>
+                  <StyledTableCell>
+                    {row.category ? row.category : "--"}
+                  </StyledTableCell>
+                  <StyledTableCell>
+                    {row.level ? row.level : "--"}
+                  </StyledTableCell>
+                  <StyledTableCell>
+                    {row.institute ? row.institute : "--"}
+                  </StyledTableCell>
+                  <StyledTableCell>
+                    {row.studentName ? row.studentName : "--"}
+                  </StyledTableCell>
+                  <StyledTableCell>
+                    {row.daysPerWeek ? row.daysPerWeek : "--"}
+                  </StyledTableCell>
+                  {/* <StyledTableCell>
+                    {row.details ? row.details : "--"}
+                  </StyledTableCell> */}
+                  <StyledTableCell>
+                    {row.studentGender ? row.studentGender : "--"}
+                  </StyledTableCell>
+                  <StyledTableCell>
+                    {row.status ? row.status : "--"}
+                  </StyledTableCell>
+                  <StyledTableCell>
+                    {row.parentId ? row.parentId : "--"}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
     </Container>
   );
