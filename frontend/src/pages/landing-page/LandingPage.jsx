@@ -13,6 +13,8 @@ const LandingPage = () => {
     <Navigate to={urls.PARENT_DASHBOARD} />
   ) : localStorage.getItem("auth-tutor") ? (
     <Navigate to={urls.TUTOR_DASHBOARD} />
+  ) : localStorage.getItem("auth-admin") ? (
+    <Navigate to={urls.ADMIN_DASHBOARD} />
   ) : (
     <Box sx={{ m: 3 }}>
       <Header />

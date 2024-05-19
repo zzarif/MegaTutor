@@ -29,6 +29,7 @@ export default function AccountMenu() {
     setAnchorEl(null);
     localStorage.removeItem("auth-parent");
     localStorage.removeItem("auth-tutor");
+    localStorage.removeItem("auth-admin");
     navigate("/" + urls.LOGIN);
   };
 

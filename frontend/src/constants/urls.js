@@ -2,6 +2,7 @@ export const urls = {
   LANDING_PAGE: "/",
   LOGIN: "login",
   SIGNUP: "signup",
+  ADMIN_LOGIN: "admin-login",
 
   // parents directories
   PARENT_DASHBOARD: "parent-dashboard",
@@ -16,5 +17,9 @@ export const urls = {
   MY_APPLICATIONS: "my-applications",
   MY_JOBS: "my-jobs",
 
-  PAYMENT: "payment",
+  // admin directories
+  ADMIN_DASHBOARD: "admin-dashboard",
+  ALL_PARENTS: "all-parents",
+  ALL_TUTORS: "all-tutors",
+  ALL_JOBS: "all-jobs",
 };
