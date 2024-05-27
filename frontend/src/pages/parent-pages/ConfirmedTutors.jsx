@@ -6,6 +6,7 @@ import {
   Box,
   Avatar,
   Divider,
+  Rating,
 } from "@mui/material";
 import CustomCard from "../../styles/customCard";
 import { EventNoteRounded, School, Verified } from "@mui/icons-material";
@@ -148,7 +149,7 @@ const ConfirmedTutors = () => {
                   </Typography>
                 </Box>
 
-                <Box ml={1.5} display="flex" alignItems="center" gap={1}>
+                <Box m={1.5} display="flex" alignItems="center" gap={1}>
                   <Typography
                     variant="body2"
                     component="p"
@@ -160,6 +161,9 @@ const ConfirmedTutors = () => {
                     <br />
                     {item.location} ({item.daysPerWeek})
                   </Typography>
+                </Box>
+                <Box ml={1} display="flex" alignItems="center">
+                  <Rating name="read-only" value={5} readOnly />
                 </Box>
               </CardContent>
             </CustomCard>

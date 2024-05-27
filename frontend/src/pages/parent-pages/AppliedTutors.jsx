@@ -7,6 +7,7 @@ import {
   Avatar,
   Divider,
   Button,
+  Rating,
 } from "@mui/material";
 import CustomCard from "../../styles/customCard";
 import PreviewVerification from "../../components/verfication-preview/PreviewVerification";
@@ -186,7 +187,7 @@ const AppliedTutors = () => {
                   </Typography>
                 </Box>
 
-                <Box ml={1.5} display="flex" alignItems="center" gap={1}>
+                <Box m={1.5} display="flex" alignItems="center" gap={1}>
                   <Typography
                     variant="body2"
                     component="p"
@@ -198,6 +199,9 @@ const AppliedTutors = () => {
                     <br />
                     {item.location} ({item.daysPerWeek})
                   </Typography>
+                </Box>
+                <Box ml={1} display="flex" alignItems="center">
+                  <Rating name="read-only" value={5} readOnly />
                 </Box>
               </CardContent>
               <Button
