@@ -132,7 +132,6 @@ const RequestTutor = () => {
               <MenuItem value="">Select Student Gender</MenuItem>
               <MenuItem value="Male">Male</MenuItem>
               <MenuItem value="Female">Female</MenuItem>
-              <MenuItem value="Any">Others</MenuItem>
             </Select>
           </FormControl>
         </Grid>
