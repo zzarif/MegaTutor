@@ -72,14 +72,16 @@ function SignupPage() {
       if (response.ok) {
         const data = await response.json();
         console.log("User registered successfully:", data.user);
-        // Handle success, e.g., redirect to a success page or update the UI
-        if (role === "Parent or Student") {
-          localStorage.setItem("auth-parent", JSON.stringify(data.user));
-          navigate("/" + urls.PARENT_DASHBOARD);
-        } else {
-          localStorage.setItem("auth-tutor", JSON.stringify(data.user));
-          navigate("/" + urls.TUTOR_DASHBOARD);
-        }
+        // Handle email verification
+        alert("Please verify your email.");
+        navigate("/" + urls.LOGIN);
+        // if (role === "Parent or Student") {
+        //   localStorage.setItem("auth-parent", JSON.stringify(data.user));
+        //   navigate("/" + urls.LOGIN);
+        // } else {
+        //   localStorage.setItem("auth-tutor", JSON.stringify(data.user));
+        //   navigate("/" + urls.TUTOR_DASHBOARD);
+        // }
       } else {
         const errorData = await response.json();
         console.error("Error registering user:", errorData.error);

@@ -83,15 +83,20 @@ const login = async (req, res) => {
     // Firebase automatically compares the provided password with the stored hashed password.
     // You don't need to manually compare the passwords.
 
-    const docSnap = await getDoc(
-      doc(db, process.env.USERS_COLLECTION, user.uid)
-    );
-
-    const { role } = docSnap.data();
-
-    res
-      .status(200)
-      .json({ message: "User logged in successfully", user, role });
+    if(user.emailVerified) {
+      const docSnap = await getDoc(
+        doc(db, process.env.USERS_COLLECTION, user.uid)
+      );
+  
+      const { role } = docSnap.data();
+  
+      res
+        .status(200)
+        .json({ message: "User logged in successfully", user, role });
+    } else {
+      res.status(401).json({ error: "Please verify your email to proceed." });
+    }
+    
   } catch (error) {
     console.error("Error logging in user:", error);
     res.status(401).json({ error: "Invalid email or password" });
