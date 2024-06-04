@@ -2,6 +2,7 @@ const {
   fetchSignInMethodsForEmail,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendEmailVerification,
   updateProfile,
 } = require("firebase/auth");
 const { doc, setDoc, getDoc, updateDoc } = require("firebase/firestore");
@@ -27,6 +28,8 @@ const register = async (req, res) => {
         password
       );
       const user = userCredential.user;
+
+      await sendEmailVerification(user);
 
       // update the display name
       await updateProfile(user, { displayName: name });
