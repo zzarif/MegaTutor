@@ -4,7 +4,14 @@ import ModalClose from "@mui/joy/ModalClose";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 
-export default function PreviewVerification({ open, setOpen }) {
+export default function PreviewVerification({
+  open,
+  setOpen,
+  name,
+  hscGPA,
+  hscRegiNo,
+  hscYear,
+}) {
   return (
     <Fragment>
       <Modal
@@ -36,8 +43,45 @@ export default function PreviewVerification({ open, setOpen }) {
           >
             Verification Details
           </Typography>
-          <img width={600} alt="Result" src="/result.png">
-          </img>
+          <img width={600} alt="Result Header" src="/result_header.png"></img>
+          <br />
+          <Typography
+            component="p"
+            textColor="inherit"
+            fontFamily="Poppins"
+            ml={1}
+            mb={1}
+          >
+            Name: {name}
+          </Typography>
+          <Typography
+            component="p"
+            textColor="inherit"
+            fontFamily="Poppins"
+            ml={1}
+            mb={1}
+          >
+            GPA: {hscGPA}
+          </Typography>
+          <Typography
+            component="p"
+            textColor="inherit"
+            fontFamily="Poppins"
+            ml={1}
+            mb={1}
+          >
+            Regi. No: {hscRegiNo}
+          </Typography>
+          <Typography
+            component="p"
+            textColor="inherit"
+            fontFamily="Poppins"
+            ml={1}
+            mb={1}
+          >
+            Year: {hscYear}
+          </Typography>
+          <img width={600} alt="Result Footer" src="/result_footer.png"></img>
         </Sheet>
       </Modal>
     </Fragment>

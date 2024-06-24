@@ -85,6 +85,10 @@ const AppliedTutors = () => {
   };
 
   const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [hscGPA, setHscGPA] = useState("");
+  const [hscRegiNo, setHscRegiNo] = useState("");
+  const [hscYear, setHscYear] = useState("");
 
   return (
     <Container maxWidth="sm">
@@ -126,7 +130,15 @@ const AppliedTutors = () => {
                         <b>{item.name}</b>
                       </Typography>
                       {item.verified && (
-                        <IconButton onClick={() => setOpen(true)}>
+                        <IconButton
+                          onClick={() => {
+                            setName(item.name);
+                            setHscGPA(item.hscGPA);
+                            setHscRegiNo(item.hscRegiNo);
+                            setHscYear(item.hscYear);
+                            setOpen(true);
+                          }}
+                        >
                           <Verified sx={{ color: "green" }} />
                         </IconButton>
                       )}
@@ -217,7 +229,14 @@ const AppliedTutors = () => {
           </Box>
         ))
       )}
-      <PreviewVerification open={open} setOpen={setOpen} />
+      <PreviewVerification
+        open={open}
+        setOpen={setOpen}
+        name={name}
+        hscGPA={hscGPA}
+        hscRegiNo={hscRegiNo}
+        hscYear={hscYear}
+      />
     </Container>
   );
 };
