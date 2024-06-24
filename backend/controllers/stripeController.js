@@ -2,13 +2,13 @@ const Stripe = require("stripe");
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 const processPayment = async (req, res) => {
-  const { success_url, cancel_url } = req.body;
+  const { success_url, cancel_url, customer_email } = req.body;
   try {
     const session = await stripe.checkout.sessions
       .create({
         payment_method_types: ["card"],
         client_reference_id: "bk_7a-fbd11708381007124",
-        customer_email: "payment@megatutor.com",
+        customer_email: customer_email,
         metadata: {
           workshop_id: "workshop_id",
           customer_id: 123456,

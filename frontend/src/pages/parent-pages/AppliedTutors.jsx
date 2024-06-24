@@ -62,12 +62,13 @@ const AppliedTutors = () => {
       }confirmJob?jobId=${jobId}&applicationId=${applicationId}`;
       const cancel_url =
         "https://tsparticles.github.io/404-templates/simple/404.html";
+      const customer_email = JSON.parse(localStorage.getItem("auth-parent")).email;
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ success_url, cancel_url }),
+        body: JSON.stringify({ success_url, cancel_url, customer_email }),
       });
 
       if (response.ok) {
