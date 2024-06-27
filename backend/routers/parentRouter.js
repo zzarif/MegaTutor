@@ -4,6 +4,7 @@ const {
   getPostedJobs,
   getAppliedTutors,
   confirmJob,
+  declineJob,
   getConfirmedTutors,
 } = require("../controllers/parentController");
 
@@ -13,6 +14,7 @@ parentRouter.post("/postNewJob", postNewJob);
 parentRouter.get("/getPostedJobs", getPostedJobs);
 parentRouter.get("/getAppliedTutors", getAppliedTutors);
 parentRouter.get("/confirmJob", confirmJob);
+parentRouter.post("/declineJob", declineJob);
 parentRouter.get("/getConfirmedTutors", getConfirmedTutors);
 
 module.exports = parentRouter;

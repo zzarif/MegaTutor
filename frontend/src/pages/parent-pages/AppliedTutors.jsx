@@ -11,7 +11,13 @@ import {
 } from "@mui/material";
 import CustomCard from "../../styles/customCard";
 import PreviewVerification from "../../components/verfication-preview/PreviewVerification";
-import { Check, EventNoteRounded, School, Verified } from "@mui/icons-material";
+import {
+  Cancel,
+  Check,
+  EventNoteRounded,
+  School,
+  Verified,
+} from "@mui/icons-material";
 import FacebookCircularProgress from "../../components/fbspinner/FacebookCircularProgress";
 import { centered } from "../../styles/centered";
 import { btnStyles3 } from "../../styles/btnStyles3";
@@ -62,7 +68,9 @@ const AppliedTutors = () => {
       }confirmJob?jobId=${jobId}&applicationId=${applicationId}`;
       const cancel_url =
         "https://tsparticles.github.io/404-templates/simple/404.html";
-      const customer_email = JSON.parse(localStorage.getItem("auth-parent")).email;
+      const customer_email = JSON.parse(
+        localStorage.getItem("auth-parent")
+      ).email;
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -75,6 +83,31 @@ const AppliedTutors = () => {
         const json = await response.json();
         const paymentPageLink = json.data.session_url;
         window.location.href = paymentPageLink;
+      } else {
+        const errorData = await response.json();
+        alert(errorData.error);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert(error);
+    }
+  };
+
+  const declineTutor = async (jobId, applicationId) => {
+    try {
+      const url = new URL(import.meta.env.VITE_API_BASE_URL + "declineJob");
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ jobId, applicationId }),
+      });
+
+      if (response.ok) {
+        const json = await response.json();
+        alert(json.message);
+        window.location.reload();
       } else {
         const errorData = await response.json();
         alert(errorData.error);
@@ -217,15 +250,26 @@ const AppliedTutors = () => {
                   <Rating name="read-only" value={5} readOnly />
                 </Box>
               </CardContent>
-              <Button
-                startIcon={<Check />}
-                sx={btnStyles3}
-                onClick={() => handlePayment(item.jobId, item.applicationId)}
-                variant="contained"
-                color="primary"
-              >
-                <b>Proceed to Checkout to Confirm Tutor</b>
-              </Button>
+              <div style={{ display: "flex" }}>
+                <Button
+                  startIcon={<Check />}
+                  sx={btnStyles3}
+                  onClick={() => handlePayment(item.jobId, item.applicationId)}
+                  variant="contained"
+                  color="primary"
+                >
+                  <b>Accept</b>
+                </Button>
+                <Button
+                  startIcon={<Cancel />}
+                  sx={btnStyles3}
+                  onClick={() => declineTutor(item.jobId, item.applicationId)}
+                  variant="contained"
+                  color="primary"
+                >
+                  <b>Decline</b>
+                </Button>
+              </div>
             </CustomCard>
           </Box>
         ))

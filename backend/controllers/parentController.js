@@ -8,6 +8,7 @@ const {
   getDoc,
   doc,
   updateDoc,
+  deleteDoc,
 } = require("firebase/firestore");
 const { db } = require("../config/firebase");
 
@@ -95,10 +96,30 @@ const confirmJob = async (req, res) => {
         status: "confirmed",
       }
     );
-    res.status(200).send(`Payment Successful and Tutor confirmed. <a href="https://megatutor.vercel.app/confirmed-tutors">View status</a>.`);
+    res
+      .status(200)
+      .send(
+        `Payment Successful and Tutor confirmed. <a href="https://megatutor.vercel.app/confirmed-tutors">View status</a>.`
+      );
   } catch (error) {
     console.error("Error confirming job:", error);
     res.status(500).json({ error: "Failed to confirm job." });
+  }
+};
+
+const declineJob = async (req, res) => {
+  const { jobId, applicationId } = req.body;
+  try {
+    await updateDoc(doc(db, process.env.JOBS_COLLECTION, jobId), {
+      status: "pending",
+    });
+    await deleteDoc(
+      doc(db, process.env.APPLICATIONS_COLLECTION, applicationId)
+    );
+    res.status(200).json({ message: `Tutor Application denied.` });
+  } catch (error) {
+    console.error("Error denying job:", error);
+    res.status(500).json({ error: "Failed to deny job." });
   }
 };
 
@@ -146,5 +167,6 @@ module.exports = {
   getPostedJobs,
   getAppliedTutors,
   confirmJob,
+  declineJob,
   getConfirmedTutors,
 };
