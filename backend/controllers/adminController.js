@@ -1,4 +1,11 @@
-const { collection, getDocs, where, query, getDoc, updateDoc, doc } = require("firebase/firestore");
+const {
+  collection,
+  getDocs,
+  where,
+  query,
+  updateDoc,
+  doc,
+} = require("firebase/firestore");
 const { db } = require("../config/firebase");
 
 const getAllJobs = async (req, res) => {
@@ -44,20 +51,23 @@ const getAllTutors = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const { email, name, phone } = req.body;
+  const { email, name, phone, role } = req.body;
 
   try {
-    const snapshot = await getDoc(
+    const snapshot = await getDocs(
       query(
         collection(db, process.env.USERS_COLLECTION),
         where("email", "==", email)
       )
     );
 
-    await updateDoc(doc(db, process.env.USERS_COLLECTION, snapshot.id), {
-      name: name,
-      phone: phone,
-    });
+    await updateDoc(
+      doc(db, process.env.USERS_COLLECTION, snapshot.docs[0].id),
+      {
+        name: name,
+        phone: phone,
+      }
+    );
 
     res.status(200).json({ message: "User updated successfully" });
   } catch (error) {
