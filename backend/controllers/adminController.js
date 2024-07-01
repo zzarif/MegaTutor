@@ -43,8 +43,32 @@ const getAllTutors = async (req, res) => {
   }
 };
 
+const updateUser = async (req, res) => {
+  const { email, name, phone } = req.body;
+
+  try {
+    const snapshot = await getDoc(
+      query(
+        collection(db, process.env.USERS_COLLECTION),
+        where("email", "==", email)
+      )
+    );
+
+    await updateDoc(doc(db, process.env.USERS_COLLECTION, snapshot.id), {
+      name: name,
+      phone: phone,
+    });
+
+    res.status(200).json({ message: "User updated successfully" });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(401).json({ error: "Error updating user:" });
+  }
+};
+
 module.exports = {
   getAllJobs,
   getAllParents,
   getAllTutors,
+  updateUser,
 };
