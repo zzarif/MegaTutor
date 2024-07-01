@@ -6,6 +6,7 @@ const {
   confirmJob,
   declineJob,
   getConfirmedTutors,
+  rateTutor
 } = require("../controllers/parentController");
 
 const parentRouter = express.Router();
@@ -16,5 +17,6 @@ parentRouter.get("/getAppliedTutors", getAppliedTutors);
 parentRouter.get("/confirmJob", confirmJob);
 parentRouter.post("/declineJob", declineJob);
 parentRouter.get("/getConfirmedTutors", getConfirmedTutors);
+parentRouter.post("/rateTutor", rateTutor);
 
 module.exports = parentRouter;

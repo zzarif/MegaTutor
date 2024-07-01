@@ -53,6 +53,7 @@ const ConfirmedTutors = () => {
   }, []);
 
   const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [hscGPA, setHscGPA] = useState("");
   const [hscRegiNo, setHscRegiNo] = useState("");
@@ -101,6 +102,7 @@ const ConfirmedTutors = () => {
                         <IconButton
                           onClick={() => {
                             setName(item.name);
+                            setEmail(item.email);
                             setHscGPA(item.hscGPA);
                             setHscRegiNo(item.hscRegiNo);
                             setHscYear(item.hscYear);
@@ -175,7 +177,7 @@ const ConfirmedTutors = () => {
                   </Typography>
                 </Box>
                 <Box ml={1} display="flex" alignItems="center">
-                  <Rating name="read-only" value={5} readOnly />
+                  <Rating name="read-only" value={item.rating} readOnly />
                 </Box>
               </CardContent>
             </CustomCard>
@@ -186,6 +188,7 @@ const ConfirmedTutors = () => {
         open={open}
         setOpen={setOpen}
         name={name}
+        email={email}
         hscGPA={hscGPA}
         hscRegiNo={hscRegiNo}
         hscYear={hscYear}

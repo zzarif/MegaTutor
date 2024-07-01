@@ -162,6 +162,31 @@ const getConfirmedTutors = async (req, res) => {
   }
 };
 
+const rateTutor = async (req, res) => {
+  const { email, rating } = req.body;
+
+  try {
+    const snapshot = await getDocs(
+      query(
+        collection(db, process.env.USERS_COLLECTION),
+        where("email", "==", email)
+      )
+    );
+
+    await updateDoc(
+      doc(db, process.env.USERS_COLLECTION, snapshot.docs[0].id),
+      {
+        rating: rating,
+      }
+    );
+
+    res.status(200).json({ message: "User updated successfully" });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(401).json({ error: "Error updating user:" });
+  }
+};
+
 module.exports = {
   postNewJob,
   getPostedJobs,
@@ -169,4 +194,5 @@ module.exports = {
   confirmJob,
   declineJob,
   getConfirmedTutors,
+  rateTutor
 };

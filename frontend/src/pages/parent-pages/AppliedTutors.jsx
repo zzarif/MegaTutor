@@ -120,6 +120,7 @@ const AppliedTutors = () => {
 
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [hscGPA, setHscGPA] = useState("");
   const [hscRegiNo, setHscRegiNo] = useState("");
   const [hscYear, setHscYear] = useState("");
@@ -167,6 +168,7 @@ const AppliedTutors = () => {
                         <IconButton
                           onClick={() => {
                             setName(item.name);
+                            setEmail(item.email);
                             setHscGPA(item.hscGPA);
                             setHscRegiNo(item.hscRegiNo);
                             setHscYear(item.hscYear);
@@ -247,7 +249,7 @@ const AppliedTutors = () => {
                   </Typography>
                 </Box>
                 <Box ml={1} display="flex" alignItems="center">
-                  <Rating name="read-only" value={5} readOnly />
+                  <Rating name="read-only" value={item.rating} readOnly />
                 </Box>
               </CardContent>
               <div style={{ display: "flex" }}>
@@ -278,6 +280,7 @@ const AppliedTutors = () => {
         open={open}
         setOpen={setOpen}
         name={name}
+        email={email}
         hscGPA={hscGPA}
         hscRegiNo={hscRegiNo}
         hscYear={hscYear}

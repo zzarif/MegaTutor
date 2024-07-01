@@ -60,6 +60,13 @@ const register = async (req, res) => {
           verified: true,
         });
       }
+
+      // add user rating
+      if(role === "Tutor") {
+        await updateDoc(doc(db, process.env.USERS_COLLECTION, user.uid), {
+          rating: 0,
+        });
+      }
     }
   } catch (error) {
     console.error("Error registering user:", error);
