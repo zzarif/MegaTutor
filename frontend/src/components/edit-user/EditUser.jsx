@@ -108,19 +108,19 @@ export default function EditUser({
                 onChange={(e) => setPhone(e.target.value)}
               />
             </Grid>
-          </Grid>
-          <Grid item xs={12}>
-            <LoadingButton
-              loading={loading}
-              startIcon={<Edit />}
-              loadingPosition="start"
-              sx={btnStyles2}
-              onClick={updateUser}
-              variant="contained"
-              color="primary"
-            >
-              <b>Update Parent</b>
-            </LoadingButton>
+            <Grid item xs={12}>
+              <LoadingButton
+                loading={loading}
+                startIcon={<Edit />}
+                loadingPosition="start"
+                sx={btnStyles2}
+                onClick={updateUser}
+                variant="contained"
+                color="primary"
+              >
+                <b>Update {role}</b>
+              </LoadingButton>
+            </Grid>
           </Grid>
         </Sheet>
       </Modal>

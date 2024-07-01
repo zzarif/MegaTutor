@@ -6,21 +6,24 @@ import {
   Box,
   Avatar,
   Divider,
+  IconButton,
 } from "@mui/material";
 import CustomCard from "../../styles/customCard";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import { StyledTableCell, StyledTableRow} from "../../styles/table_styles";
+import { StyledTableCell, StyledTableRow } from "../../styles/table_styles";
 import Paper from "@mui/material/Paper";
 import {
+  Edit,
   EventNoteRounded,
   LocationOnRounded,
   School,
 } from "@mui/icons-material";
 import FacebookCircularProgress from "../../components/fbspinner/FacebookCircularProgress";
 import { centered } from "../../styles/centered";
+import EditUser from "../../components/edit-user/EditUser";
 
 const AllTutors = () => {
   const [jobList, setJobList] = useState([]);
@@ -54,6 +57,11 @@ const AllTutors = () => {
   useEffect(() => {
     fetchAllTutors();
   }, []);
+
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
 
   return (
     <Container maxWidth={300}>
@@ -118,6 +126,7 @@ const AllTutors = () => {
                 <StyledTableCell>
                   <b>SscRegiNo</b>
                 </StyledTableCell>
+                <StyledTableCell></StyledTableCell>
               </StyledTableRow>
             </TableHead>
             <TableBody>
@@ -164,12 +173,34 @@ const AllTutors = () => {
                   <StyledTableCell>
                     {row.sscRegiNo ? row.sscRegiNo : "--"}
                   </StyledTableCell>
+                  <StyledTableCell>
+                    <IconButton
+                      onClick={() => {
+                        setEmail(row.email);
+                        setName(row.name);
+                        setPhone(row.phone);
+                        setOpen(true);
+                      }}
+                    >
+                      <Edit />
+                    </IconButton>
+                  </StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
       )}
+      <EditUser
+        open={open}
+        setOpen={setOpen}
+        email={email}
+        name={name}
+        setName={setName}
+        phone={phone}
+        setPhone={setPhone}
+        role="Tutor"
+      />
     </Container>
   );
 };
