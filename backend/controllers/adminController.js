@@ -1,4 +1,4 @@
-const { collection, getDocs, where, query } = require("firebase/firestore");
+const { collection, getDocs, where, query, getDoc, updateDoc, doc } = require("firebase/firestore");
 const { db } = require("../config/firebase");
 
 const getAllJobs = async (req, res) => {
